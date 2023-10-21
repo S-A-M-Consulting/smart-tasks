@@ -15,4 +15,5 @@ const getTasksByUser = (user_id) => {
     .then(data => data.rows)
     .catch(error(`getTasksByUser ${user_id}`));
 }
-module.exports = { getUsers };
+
+module.exports = { getUsers, getTasksByUser };
