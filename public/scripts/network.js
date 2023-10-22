@@ -32,20 +32,19 @@ const createTask = function (data) {
   });
 };
 
-const editTask = function (data) {
+// this function can edit the task description itself aswell as mark it as complete
+const editTask = function (taskId, data) {
   return $.ajax({
     method: "PATCH",
-    url: "/api/tasks/:id",
+    url: "/api/tasks/${taskId}",
     data,
   });
 };
 
-const deleteTask = function (data) {
+const deleteTask = function (taskId, data) {
   return $.ajax({
     method: "DELETE",
-    url: "/api/tasks/:id",
+    url: "/api/tasks/${taskId}",
     data,
   });
 };
-
-// const completeTask =
