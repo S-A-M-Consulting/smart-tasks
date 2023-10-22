@@ -1,19 +1,22 @@
 const db = require('../connection');
+const { error, getOne, getAll} = require('./util.js');
 
-const error = clientMsg => error => console.log(clientMsg, error.message);
 
 const getUsers = () => {
-  return db.query('SELECT * FROM users;')
-    .then(data => {
-      return data.rows;
-    })
+  return db.query('SELECT * FROM users')
+    .then(getAll)
     .catch(error('getUsers'));
 };
 
-const getTasksByUser = (user_id) => {
-  return db.query('SELECT * FROM tasks WHERE user_id = $1', [user_id])
-    .then(data => data.rows)
-    .catch(error(`getTasksByUser ${user_id}`));
+const getUserById = user_id => {
+  return db.query('SELECT * FROM users WHERE id = $1', [user_id])
+    .then(getOne)
+    .catch(error('getUserById'));
 }
 
-module.exports = { getUsers, getTasksByUser };
+if (process.env.debug) {
+  getUsers().then(data => console.log("1:", data));
+  getUserById(2).then(data => console.log("2:", data));
+}
+
+module.exports = { getUsers, getUserById };
