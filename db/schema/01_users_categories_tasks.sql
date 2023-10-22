@@ -11,13 +11,13 @@ CREATE TABLE users (
 
 CREATE TABLE categories (
   id SERIAL PRIMARY KEY NOT NULL,
-  category VARCHAR(255) NOT NULL
+  category_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id),
   category_id INTEGER REFERENCES categories(id),
-  task VARCHAR(255) NOT NULL,
-  isComplete BOOLEAN
+  task_name VARCHAR(255) NOT NULL,
+  is_complete BOOLEAN
 );
