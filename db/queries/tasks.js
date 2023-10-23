@@ -1,3 +1,4 @@
+//Authored by @mxtchjohnston
 const db = require('../connection');
 const { error, getAll, insert, update} = require('./util.js');
 
