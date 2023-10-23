@@ -18,7 +18,13 @@ $(document).ready(function () {
     return $.ajax({
       method: "POST",
       url: "/users/logout",
-    });
+    })
+      .then((userId) => {
+        //remove cookie
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const logIn = function (data) {
@@ -26,7 +32,13 @@ $(document).ready(function () {
       method: "POST",
       url: "/users/login",
       data,
-    });
+    })
+      .then((myTasks) => {
+        //renderMyTasks (or something similar)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const createTask = function (data) {
