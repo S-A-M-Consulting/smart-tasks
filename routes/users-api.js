@@ -21,4 +21,24 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/logout', (req, res) => {
+  req.session.user_id = null;
+  res.send({});
+});
+
+router.post('/login/:id', (req, res) => {
+  const id = req.params.id;
+  userQueries.getUserById(id)
+    .then(user => {
+      req.session.user_id = user.id;
+      res.send({
+        user: {
+          name: user.name,
+          email: user.email,
+          user_id: user.id
+        }
+      });
+    })
+})
+
 module.exports = router;
