@@ -19,7 +19,7 @@ $(() => {
         $error.appendTo("body");
         setTimeout(() => {
           $error.remove();
-          views_manager.show("listings");
+          views_manager.show("tasks");
         }, 2000);
 
         break;

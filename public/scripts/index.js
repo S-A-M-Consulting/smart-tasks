@@ -1,7 +1,8 @@
+// initial call to set views_manager to logIn
 $(() => {
-  getAllTasks().then(function (json) {
+  logIn().then(function (json) {
     // propertyListings.addProperties(json.properties);
-    // views_manager.show('listings');
+    views_manager.show("logIn");
     console.log(json);
   });
 });
