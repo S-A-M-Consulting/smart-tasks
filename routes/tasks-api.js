@@ -7,19 +7,40 @@
 
 const express = require("express");
 const router = express.Router();
-const db = require("../db/connection");
+const taskQueries = require('../db/queries/tasks');
 
 router.get("/", (req, res) => {
-  const query = `SELECT * FROM widgets`;
-  console.log(query);
-  db.query(query)
-    .then((data) => {
-      const widgets = data.rows;
-      res.json({ widgets });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
+  const user_id = req.session.user_id;
+  taskQueries
+    .getTasksByUser(user_id)
+    .then(tasks => {
+      res.send(tasks);
     });
 });
+
+router.post('/', (req, res) => {
+  const user_id = req.session.user_id;
+  const newTask = req.body;
+  newTask.user_id = user_id;
+
+  taskQueries
+    .createTask(newTask)
+    .then(task => {
+      console.log('Created Task:', task)
+      res.send(task);
+    })
+    .catch(e => console.log(e.message));
+});
+
+router.patch('/:id', (req, res) => {
+  const task_id = req.params.id;
+  const changed = req.body;
+  taskQueries
+    .editTask(task_id, changed)
+    .then(task => {
+      console.log('changed task:', task_id, task);
+      res.send(task);
+    })
+})
 
 module.exports = router;
