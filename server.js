@@ -46,6 +46,9 @@ app.use("/api/tasks", tasksApiRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+// Use the home render the index.ejs
+const homeRoutes = require("./routes/homeRoutes.js");
+app.use('/', homeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
