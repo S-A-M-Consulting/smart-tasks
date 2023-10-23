@@ -20,7 +20,7 @@ $(document).ready(function () {
       url: "/users/logout",
     })
       .then((userId) => {
-        //remove cookie
+        //remove cookie function
       })
       .catch((err) => {
         console.log(err);
@@ -71,6 +71,20 @@ $(document).ready(function () {
       data,
     })
       .then((deleteTask) => {
+        //renderMyTasks (or something similar)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const filterTask = function (categoryId, data) {
+    return $.ajax({
+      method: "GET",
+      url: "/api/tasks/${categoryId}",
+      data,
+    })
+      .then((data) => {
         //renderMyTasks (or something similar)
       })
       .catch((err) => {
