@@ -5,6 +5,7 @@ require("dotenv").config();
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
+const cookie_session = require('cookie-session');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -16,6 +17,10 @@ app.set("view engine", "ejs");
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookie_session({
+  name: 'session',
+  keys: ['key']
+}));
 app.use(
   "/styles",
   sassMiddleware({
@@ -41,7 +46,7 @@ app.use("/api/tasks", tasksApiRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-// Use the home
+// Use the home render the index.ejs
 const homeRoutes = require("./routes/homeRoutes.js");
 app.use('/', homeRoutes);
 

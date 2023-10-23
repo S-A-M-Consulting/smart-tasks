@@ -1,3 +1,5 @@
+//Authored by @mxtchjohnston
+
 /*
  * All routes for User Data are defined here
  * Since this file is loaded in server.js into api/users,
@@ -20,5 +22,25 @@ router.get('/', (req, res) => {
         .json({ error: err.message });
     });
 });
+
+router.post('/logout', (req, res) => {
+  req.session.user_id = null;
+  res.send({});
+});
+
+router.post('/login/:id', (req, res) => {
+  const id = req.params.id;
+  userQueries.getUserById(id)
+    .then(user => {
+      req.session.user_id = user.id;
+      res.send({
+        user: {
+          name: user.name,
+          email: user.email,
+          user_id: user.id
+        }
+      });
+    })
+})
 
 module.exports = router;

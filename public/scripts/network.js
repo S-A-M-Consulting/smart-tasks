@@ -2,11 +2,18 @@
 // needs to be added through a script tag on the index.html
 
 // essential ajax functions to interact with backend API
-function getAllTasks() {
+function getMyTasks(userId) {
   let url = "/api/tasks";
   return $.ajax({
     url,
-  });
+    type: "GET",
+  })
+    .then((myTasks) => {
+      //renderMyTasks (or something similar)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 function logOut() {
