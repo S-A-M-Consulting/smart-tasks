@@ -1,4 +1,41 @@
 $(document).ready(function () {
+  $("#logout").on("submit", function (event) {
+    event.preventDefault();
+
+    const logout = function () {
+      return $.ajax({
+        method: "POST",
+        url: "/users/logout",
+      });
+      // .then((userId) => {
+      //   //remove cookie callback function
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
+    };
+
+    logout();
+  });
+
+  $("#button-submit-new").on("submit", function (event) {
+    event.preventDefault();
+
+    const createTask = function (data) {
+      return $.ajax({
+        method: "POST",
+        url: "/api/tasks",
+        data,
+      })
+        .then((newTask) => {
+          //renderNewTask in html
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+  });
+
   const getMyTasks = function () {
     return $.ajax({
       url: "/api/tasks",
@@ -6,19 +43,6 @@ $(document).ready(function () {
     })
       .then((myTasks) => {
         //renderMyTasks (for currently logged in user)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const logout = function () {
-    return $.ajax({
-      method: "POST",
-      url: "/users/logout",
-    })
-      .then((userId) => {
-        //remove cookie callback function
       })
       .catch((err) => {
         console.log(err);
