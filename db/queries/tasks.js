@@ -7,6 +7,10 @@ const getTasksByUser = (user_id) => {
     .catch(error(`getTasksByUser ${user_id}`));
 }
 
+const createTask = (user_id, data) => {
+  
+}
+
 if (process.env.debug) {
   getTasksByUser(1).then(data => console.log("1:", data));
   getTasksByUser(2).then(data => console.log("2:", data));
