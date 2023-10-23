@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  let user = null;
+  let orignalTasksArray = [];
+  let filteredTasksArray = [];
   // the logout event
   $("#logout").on("submit", function (event) {
     event.preventDefault();
@@ -89,27 +92,16 @@ $(document).ready(function () {
   });
 
   // to filter specific task categories - film
-  $("#checkbox-film").on("checked", function (event) {
-    event.preventDefault();
+  $("#checkbox-film").on("change", function (event) {
+    // event.preventDefault();
 
-    const filterTask = function (categoryId) {
-      return $.ajax({
-        method: "GET",
-        url: `/api/tasks/${categoryId}`,
-        data,
-      })
-        .then((data) => {
-          //renderMyTasks (or something similar)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    filterTask(1);
+    if ($(this).is(":checked")) {
+      console.log("clicked");
+    }
   });
 
   // to filter specific task categories - restaurant
-  $("#checkbox-restaurant").on("checked", function (event) {
+  $("#checkbox-restaurant").on("click", function (event) {
     event.preventDefault();
 
     const filterTask = function (categoryId) {
@@ -129,7 +121,7 @@ $(document).ready(function () {
   });
 
   // to filter specific task categories - book
-  $("#checkbox-book").on("checked", function (event) {
+  $("#checkbox-book").on("click", function (event) {
     event.preventDefault();
 
     const filterTask = function (categoryId) {
@@ -149,7 +141,7 @@ $(document).ready(function () {
   });
 
   // to filter specific task categories - product
-  $("#checkbox-product").on("checked", function (event) {
+  $("#checkbox-product").on("click", function (event) {
     event.preventDefault();
 
     const filterTask = function (categoryId) {
