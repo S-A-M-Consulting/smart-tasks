@@ -1,4 +1,4 @@
-//const db = require('../connection');
+const db = require('../connection');
 
 const error = clientMsg => error => console.log(clientMsg, error.message);
 
@@ -6,7 +6,7 @@ const error = clientMsg => error => console.log(clientMsg, error.message);
 const getAll = data => data.rows;
 const getOne = data => data.rows[0];
 
-const insert = (table, data) => {
+const _insert = (table, data) => {
   const names = Object.keys(data);
   let valuePlaceholders = [];
 
@@ -16,8 +16,13 @@ const insert = (table, data) => {
   const nameString = names.join(', ');
   const valueString = valuePlaceholders.join(', ');
 
-  return `INSERT INTO ${table} (${nameString}) VALUES (${valueString})`;
+  return `INSERT INTO ${table} (${nameString}) VALUES (${valueString}) RETURNING *`;
 
+}
+
+const insert = (db, table, data) => {
+  const statement = _insert(table, data);
+  return db.query(statement, Object.values(data));
 }
 
 //ONLY ACCEPT $ positions
@@ -28,5 +33,5 @@ const and   = (field, value) => `AND ${field} = ${value}`;
 module.exports = {error, getAll, getOne};
 
 if (process.env.debug) {
-  console.log(insert('table', {a: 1, b: 'string', c: false}));
+  console.log(insert(db, 'users', {name: 'Mitch' , email: 'mij@example.com', password: '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'}));
 }
