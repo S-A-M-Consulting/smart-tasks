@@ -1,13 +1,11 @@
 $(document).ready(function () {
-  // essential ajax functions to interact with backend API
-  const getMyTasks = function (userId) {
-    let url = "/api/tasks";
+  const getMyTasks = function () {
     return $.ajax({
-      url,
-      type: "GET",
+      url: "/api/tasks",
+      method: "GET",
     })
       .then((myTasks) => {
-        //renderMyTasks (or something similar)
+        //renderMyTasks (for currently logged in user)
       })
       .catch((err) => {
         console.log(err);
@@ -20,7 +18,7 @@ $(document).ready(function () {
       url: "/users/logout",
     })
       .then((userId) => {
-        //remove cookie function
+        //remove cookie callback function
       })
       .catch((err) => {
         console.log(err);
@@ -33,8 +31,8 @@ $(document).ready(function () {
       url: "/users/login",
       data,
     })
-      .then((myTasks) => {
-        //renderMyTasks (or something similar)
+      .then((data) => {
+        getMyTasks();
       })
       .catch((err) => {
         console.log(err);
@@ -59,16 +57,15 @@ $(document).ready(function () {
   const editTask = function (taskId, data) {
     return $.ajax({
       method: "PATCH",
-      url: "/api/tasks/${taskId}",
+      url: `/api/tasks/${taskId}`,
       data,
     });
   };
 
-  const deleteTask = function (taskId, data) {
+  const deleteTask = function (taskId) {
     return $.ajax({
       method: "DELETE",
-      url: "/api/tasks/${taskId}",
-      data,
+      url: `/api/tasks/${taskId}`,
     })
       .then((deleteTask) => {
         //renderMyTasks (or something similar)
@@ -78,10 +75,10 @@ $(document).ready(function () {
       });
   };
 
-  const filterTask = function (categoryId, data) {
+  const filterTask = function (categoryId) {
     return $.ajax({
       method: "GET",
-      url: "/api/tasks/${categoryId}",
+      url: `/api/tasks/${categoryId}`,
       data,
     })
       .then((data) => {
