@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // the logout event
   $("#logout").on("submit", function (event) {
     event.preventDefault();
 
@@ -18,22 +19,93 @@ $(document).ready(function () {
     logout();
   });
 
+  // the submitting of a new task event
   $("#button-submit-new").on("submit", function (event) {
     event.preventDefault();
 
-    const createTask = function (data) {
+    if (!$("#button-submit-new").val()) {
+      // $("#error-message").append('<i class="fa-solid fa-triangle-exclamation"></i>You cannot post an empty tweet<i class="fa-solid fa-triangle-exclamation"></i>').show();
+    } else {
+      const createTask = function (data) {
+        return $.ajax({
+          method: "POST",
+          url: "/api/tasks",
+          data,
+        })
+          .then((newTask) => {
+            //renderNewTask in html
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+    }
+  });
+
+  // to confirm changes made to a task event
+  $("#button-task-edit-des").on("submit", function (event) {
+    event.preventDefault();
+
+    // this function can edit the task description itself aswell as mark it as complete
+    const editTask = function (taskId, data) {
       return $.ajax({
-        method: "POST",
-        url: "/api/tasks",
+        method: "PATCH",
+        url: `/api/tasks/${taskId}`,
         data,
+      });
+    };
+  });
+
+  // to mark a task as complete event
+  $("#button-task-done").on("submit", function (event) {
+    event.preventDefault();
+
+    // this function can edit the task description itself aswell as mark it as complete
+    const editTask = function (taskId, data) {
+      return $.ajax({
+        method: "PATCH",
+        url: `/api/tasks/${taskId}`,
+        data,
+      });
+    };
+  });
+
+  // to delete a task event
+  $("#button-task-delete").on("submit", function (event) {
+    event.preventDefault();
+
+    const deleteTask = function (taskId) {
+      return $.ajax({
+        method: "DELETE",
+        url: `/api/tasks/${taskId}`,
       })
-        .then((newTask) => {
-          //renderNewTask in html
+        .then((deleteTask) => {
+          //renderMyTasks (or something similar)
         })
         .catch((err) => {
           console.log(err);
         });
     };
+  });
+
+  // to filter specific task categories - film
+  $("#checkbox-film").on("submit", function (event) {
+    event.preventDefault();
+
+    const filterTask = function (categoryId) {
+      return $.ajax({
+        method: "GET",
+        url: `/api/tasks/${categoryId}`,
+        data,
+      })
+        .then((data) => {
+          //renderMyTasks (or something similar)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    filterTask(1);
   });
 
   const getMyTasks = function () {
@@ -57,56 +129,6 @@ $(document).ready(function () {
     })
       .then((data) => {
         getMyTasks();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const createTask = function (data) {
-    return $.ajax({
-      method: "POST",
-      url: "/api/tasks",
-      data,
-    })
-      .then((newTask) => {
-        //renderNewTask (or something similar)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  // this function can edit the task description itself aswell as mark it as complete
-  const editTask = function (taskId, data) {
-    return $.ajax({
-      method: "PATCH",
-      url: `/api/tasks/${taskId}`,
-      data,
-    });
-  };
-
-  const deleteTask = function (taskId) {
-    return $.ajax({
-      method: "DELETE",
-      url: `/api/tasks/${taskId}`,
-    })
-      .then((deleteTask) => {
-        //renderMyTasks (or something similar)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const filterTask = function (categoryId) {
-    return $.ajax({
-      method: "GET",
-      url: `/api/tasks/${categoryId}`,
-      data,
-    })
-      .then((data) => {
-        //renderMyTasks (or something similar)
       })
       .catch((err) => {
         console.log(err);
