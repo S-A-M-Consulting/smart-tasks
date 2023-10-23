@@ -89,7 +89,7 @@ $(document).ready(function () {
   });
 
   // to filter specific task categories - film
-  $("#checkbox-film").on("submit", function (event) {
+  $("#checkbox-film").on("checked", function (event) {
     event.preventDefault();
 
     const filterTask = function (categoryId) {
@@ -106,6 +106,66 @@ $(document).ready(function () {
         });
     };
     filterTask(1);
+  });
+
+  // to filter specific task categories - restaurant
+  $("#checkbox-restaurant").on("checked", function (event) {
+    event.preventDefault();
+
+    const filterTask = function (categoryId) {
+      return $.ajax({
+        method: "GET",
+        url: `/api/tasks/${categoryId}`,
+        data,
+      })
+        .then((data) => {
+          //renderMyTasks (or something similar)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    filterTask(2);
+  });
+
+  // to filter specific task categories - book
+  $("#checkbox-book").on("checked", function (event) {
+    event.preventDefault();
+
+    const filterTask = function (categoryId) {
+      return $.ajax({
+        method: "GET",
+        url: `/api/tasks/${categoryId}`,
+        data,
+      })
+        .then((data) => {
+          //renderMyTasks (or something similar)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    filterTask(3);
+  });
+
+  // to filter specific task categories - product
+  $("#checkbox-product").on("checked", function (event) {
+    event.preventDefault();
+
+    const filterTask = function (categoryId) {
+      return $.ajax({
+        method: "GET",
+        url: `/api/tasks/${categoryId}`,
+        data,
+      })
+        .then((data) => {
+          //renderMyTasks (or something similar)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    filterTask(4);
   });
 
   const getMyTasks = function () {
