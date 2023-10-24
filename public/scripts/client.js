@@ -14,7 +14,7 @@ const createNewCard = function (task) {
          <p class="card-text">Todo task description</p>
           <div class="d-flex justify-content-between align-items-center">
            <div class="btn-group">
-            <button id="done" type="button" class="btn btn-sm btn-outline-secondary done-button">Done</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary done-button">Done</button>
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle category-button" data-bs-toggle="dropdown" aria-expanded="false">
               Change Category
             </button>
@@ -166,12 +166,12 @@ const renderTasks = function (tasks) {
   const renderedTasks = [];
   for (let task of tasks) {
     const newCard = createNewCard(task);
-
-    newCard.on('')
-
     renderedTasks.push(newCard);
   }
   $('#tasks-container-film').empty().append(renderedTasks);
+  $('button.done-button').on('click', e => {
+    console.log('This is a log');
+  });
 };
 
 const handleFilterView = function (event) {
@@ -221,4 +221,6 @@ $(document).ready(() => {
   getMyTasks();
   addNewTaskHandler();
   addFilterTasksHandler();
+
+
 });
