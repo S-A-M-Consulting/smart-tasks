@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  let user = null;
+  //let user = {id: 1};
   let orignalTasksArray = [];
   let filteredTasksArray = [];
   // the logout event
@@ -24,28 +24,30 @@ $(document).ready(function () {
   // the submitting of a new task event
   $(".newtask-form").on("submit", function (event) {
     event.preventDefault();
-    const textValue = $('#text').val();
-    if (!textValue) {
-      // $("#error-message").append('<i class="fa-solid fa-triangle-exclamation"></i>You cannot post an empty tweet<i class="fa-solid fa-triangle-exclamation"></i>').show();
-      return;
-    }
-    
-    const createTask = function (data) {
-      return $.ajax({
-        method: "POST",
-        url: "/api/tasks",
-        data,
-      })
-        .then((newTask) => {
-          //renderNewTask in html
-          console.log(newTask);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    createTask(textValue);
+    console.log('IN submit event');
+    const $text = $('#task_name');
+    const task_name = $('#newTask-text').val();
 
+    const newTask = {
+      user_id: 1,
+      task_name: task_name,
+      is_complete: false,
+      category_id: 1
+    };
+
+
+    return $.ajax({
+      method: "POST",
+      url: "/api/tasks",
+      data: newTask,
+    })
+      .then((newTask) => {
+        //renderNewTask in html
+        console.log(newTask);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   // to confirm changes made to a task event

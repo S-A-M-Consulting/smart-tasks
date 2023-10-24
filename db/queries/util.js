@@ -24,6 +24,8 @@ const _insert = (table, names) => {
 
 const insert = (db, table, data) => {
   const statement = _insert(table, Object.keys(data));
+  debug(() => console.log(statement));
+  debug(() => console.log(data));
   return db.query(statement, Object.values(data));
 }
 
@@ -45,5 +47,5 @@ module.exports = {error, debug, getAll, getOne, insert, update};
 
 debug(() => {
   //console.log(insert(db, 'users', {name: 'jessie' , email: 'j@example.com', password: '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'}));
-  console.log(update(db, 'users', 4, {name: 'Jessie Ware', email: 'jw@example.com'}));
+  //console.log(update(db, 'users', 4, {name: 'Jessie Ware', email: 'jw@example.com'}));
 });
