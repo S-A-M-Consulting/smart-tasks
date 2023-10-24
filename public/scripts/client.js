@@ -3,6 +3,7 @@ $(document).ready(function () {
   let orignalTasksArray = [];
   let filteredTasksArray = [];
   // the logout event
+
   $("#logout").on("submit", function (event) {
     event.preventDefault();
 
@@ -44,6 +45,7 @@ $(document).ready(function () {
       .then((newTask) => {
         //renderNewTask in html
         console.log(newTask);
+        getMyTasks(1);
       })
       .catch((err) => {
         console.log(err);
@@ -104,7 +106,7 @@ $(document).ready(function () {
         (task) =>
           task.category_id === 2 ||
           task.category_id === 3 ||
-          task.category === 4
+          task.category_id === 4
       );
     }
     renderTasks(filteredTasksArray);
@@ -132,12 +134,12 @@ $(document).ready(function () {
     }
   });
 
-  // login event
+  // login event, FIX THIS
   $("PLACEHOLDER").on("submit", function (event) {
     event.preventDefault();
 
     const logIn = function (data) {
-      return $.ajax({
+      $.ajax({
         method: "POST",
         url: "/users/login",
         data,
@@ -160,11 +162,23 @@ $(document).ready(function () {
       method: "GET",
     })
       .then((myTasks) => {
-        let orignalTasksArray = myTasks;
+        console.log(myTasks)
+        orignalTasksArray = myTasks;
         renderTasks(myTasks);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const renderTasks = function(tasks) {
+    console.log('tasks:', tasks);
+    const renderedTasks = []
+    for (let task of tasks) {
+      renderedTasks.push(getCard(task));
+    }
+    $('#tasks-container-film').empty().append(renderedTasks);
+  }
+
+  getMyTasks();
 });

@@ -11,7 +11,8 @@ const router = express.Router();
 const taskQueries = require('../db/queries/tasks');
 
 router.get("/", (req, res) => {
-  const user_id = req.session.user_id;
+  //const user_id = req.session.user_id;
+  const user_id = 1;
   taskQueries
     .getTasksByUser(user_id)
     .then(tasks => {

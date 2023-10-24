@@ -1,7 +1,7 @@
 <!--Using Bootstrap for our really production-->
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
+  <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
+    <script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
 
     <!-- App internal CSS -->
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
@@ -26,6 +27,7 @@
 
     <!--internal JS-->
     <script src="/scripts/libraries/jquery-3.4.0.min.js"></script>
+    <script src="/components/card.js"></script>
     <script src="/scripts/client.js"></script>
     <script src="/scripts/task-edit-des.js"></script>
 
@@ -282,7 +284,7 @@
 
       <!--begin the each container-->
       <h1 class="category-title-film">Film</h1>
-      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div id="tasks-container-film" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         <div id="task-1" class="col task">
           <div class="card shadow-sm">
