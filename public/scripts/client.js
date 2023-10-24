@@ -24,12 +24,12 @@ $(document).ready(function () {
   // the submitting of a new task event
   $(".newtask-form").on("submit", function (event) {
     event.preventDefault();
-    console.log('IN submit event');
+
     const $text = $('#task_name');
     const task_name = $('#newTask-text').val();
 
     const newTask = {
-      user_id: 1,
+      //user_id: 1,
       task_name: task_name,
       is_complete: false,
       category_id: 1
@@ -153,6 +153,7 @@ $(document).ready(function () {
     logIn();
   });
 
+
   const getMyTasks = function (userID) {
     return $.ajax({
       url: "/api/tasks",
@@ -160,6 +161,7 @@ $(document).ready(function () {
     })
       .then((myTasks) => {
         let orignalTasksArray = myTasks;
+        renderTasks(myTasks);
       })
       .catch((err) => {
         console.log(err);

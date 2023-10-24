@@ -20,9 +20,9 @@ router.get("/", (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const user_id = req.session.user_id;
+  //const user_id = req.session.user_id;
   const newTask = req.body;
-  newTask.user_id = user_id;
+  //newTask.user_id = user_id;
 
   taskQueries
     .createTask(newTask)

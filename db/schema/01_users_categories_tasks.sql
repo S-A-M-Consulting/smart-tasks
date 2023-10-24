@@ -16,7 +16,7 @@ CREATE TABLE categories (
 
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id),
+  user_id INTEGER REFERENCES users(id) NOT NULL DEFAULT 1,
   category_id INTEGER REFERENCES categories(id),
   task_name VARCHAR(255) NOT NULL,
   is_complete BOOLEAN
