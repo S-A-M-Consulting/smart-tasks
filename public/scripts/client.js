@@ -94,7 +94,14 @@ $(document).ready(function () {
   $("#checkbox-film").on("change", function (event) {
     if ($(this).is(":checked")) {
       console.log("clicked");
+      filteredTasksArray = orignalTasksArray.filter(
+        (task) =>
+          task.category_id === 2 ||
+          task.category_id === 3 ||
+          task.category === 4
+      );
     }
+    renderTasks(filteredTasksArray);
   });
 
   // to filter specific task categories - restaurant
@@ -140,7 +147,7 @@ $(document).ready(function () {
     logIn();
   });
 
-  const getMyTasks = function () {
+  const getMyTasks = function (userID) {
     return $.ajax({
       url: "/api/tasks",
       method: "GET",
@@ -152,18 +159,4 @@ $(document).ready(function () {
         console.log(err);
       });
   };
-  // Don't know if needed
-  // const filterTask = function (categoryId) {
-  //   return $.ajax({
-  //     method: "GET",
-  //     url: `/api/tasks/${categoryId}`,
-  //     data,
-  //   })
-  //     .then((data) => {
-  //       //renderMyTasks (or something similar)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 });
