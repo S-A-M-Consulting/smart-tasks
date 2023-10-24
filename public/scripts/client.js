@@ -22,26 +22,30 @@ $(document).ready(function () {
   });
 
   // the submitting of a new task event
-  $("#button-submit-new").on("submit", function (event) {
+  $(".newtask-form").on("submit", function (event) {
     event.preventDefault();
-
-    if (!$("#button-submit-new").val()) {
+    const textValue = $('#text').val();
+    if (!textValue) {
       // $("#error-message").append('<i class="fa-solid fa-triangle-exclamation"></i>You cannot post an empty tweet<i class="fa-solid fa-triangle-exclamation"></i>').show();
-    } else {
-      const createTask = function (data) {
-        return $.ajax({
-          method: "POST",
-          url: "/api/tasks",
-          data,
-        })
-          .then((newTask) => {
-            //renderNewTask in html
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
+      return;
     }
+    
+    const createTask = function (data) {
+      return $.ajax({
+        method: "POST",
+        url: "/api/tasks",
+        data,
+      })
+        .then((newTask) => {
+          //renderNewTask in html
+          console.log(newTask);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    createTask(textValue);
+
   });
 
   // to confirm changes made to a task event
