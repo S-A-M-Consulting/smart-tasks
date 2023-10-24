@@ -1,7 +1,46 @@
-.dropdown-toggle {
+.button-dropdown {
   background-color: rgb(3, 127, 138);
   color: white; /* Text color in the dropdown button */
   padding: 5px 10px; /* Adjust padding as needed to make it smaller */
   font-size: 14px; /* Adjust font size as needed to make it smaller */
   border: none; /* Remove the border */
 }
+
+
+.category-title-film {
+      font-size: 36px; /* Adjust the font size as needed */
+      font-weight: bold; /* Make the text bold */
+      text-transform: uppercase; /* Convert text to uppercase */
+      color: orange; /* Change the text color to a custom color */
+      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
+      margin-bottom: 10px; /* Add some space at the bottom */
+      margin-top: 20px;
+    }
+
+.category-title-restaurant {
+      font-size: 36px; /* Adjust the font size as needed */
+      font-weight: bold; /* Make the text bold */
+      text-transform: uppercase; /* Convert text to uppercase */
+      color: green; /* Change the text color to a custom color */
+      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
+      margin-bottom: 10px; /* Add some space at the bottom */
+      margin-top: 20px;
+    }
+.category-title-book {
+      font-size: 36px; /* Adjust the font size as needed */
+      font-weight: bold; /* Make the text bold */
+      text-transform: uppercase; /* Convert text to uppercase */
+      color: purple; /* Change the text color to a custom color */
+      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
+      margin-bottom: 10px; /* Add some space at the bottom */
+      margin-top: 20px;
+    }
+.category-title-product {
+      font-size: 36px; /* Adjust the font size as needed */
+      font-weight: bold; /* Make the text bold */
+      text-transform: uppercase; /* Convert text to uppercase */
+      color: red; /* Change the text color to a custom color */
+      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
+      margin-bottom: 10px; /* Add some space at the bottom */
+      margin-top: 20px;
+    }
