@@ -1,0 +1,17 @@
+.form-check label {
+  display: flex;
+  align-items: center; /* Align items vertically in the label */
+  margin-left: 5px; /* Adjust the margin as needed to control spacing */
+}
+
+.form-check input[type="checkbox"] {
+  margin-right: 5px; /* Adjust the margin as needed to control spacing */
+}
+
+
+#button-submit-new {
+  margin-left: 10px; /* Adjust margin-top as needed */
+  margin-top: 15px;
+}
+
+

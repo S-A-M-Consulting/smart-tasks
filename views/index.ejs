@@ -19,14 +19,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
 
-    <!-- App CSS -->
+    <!-- App internal CSS -->
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-
+    <link rel="stylesheet" href="/styles/newtask.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/tasks.css" type="text/css" />
 
     <!--internal JS-->
     <script src="/scripts/libraries/jquery-3.4.0.min.js"></script>
     <script src="/scripts/client.js"></script>
-
+    <script src="/scripts/task-edit-des.js"></script>
 
 
     <style>
@@ -106,7 +107,6 @@
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
-
     </style>
 
 
@@ -200,10 +200,9 @@
         <strong>TodoGenius</strong>
       </a>
       <div class="logout-container ms-auto">
-        <a>userName</a>
+        <a id="nav-username">userName</a>
         <button id="button-logout" type="submit" class="btn btn-outline-light">Logout</button>
       </div>
-
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -212,7 +211,6 @@
 </header>
 
 <main>
-
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
@@ -227,56 +225,86 @@
               </div>
             </div>
           </form>
-          <p class="d-inline-flex gap-1">
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-              Filter the Tasks
-            </button>
-          </p>
-          <div class="collapse" id="collapseExample">
-            <div class="form-check">
-              <input id="checkbox-film" class="form-check-input" type="checkbox" value="" checked>
-              <label class="form-check-label" for="checkbox-film">
-                Film
-              </label>
-            </div>
-            <div class="form-check">
-              <input id="checkbox-restaurant" class="form-check-input" type="checkbox" value=""  checked>
-              <label class="form-check-label" for="checkbox-restaurant">
-                Restaurant
-              </label>
-            </div>
-            <div class="form-check">
-              <input id="checkbox-book" class="form-check-input" type="checkbox" value=""  checked>
-              <label class="form-check-label" for="checkbox-book">
-                Book
-              </label>
-            </div>
-            <div class="form-check">
-              <input id="checkbox-product" class="form-check-input" type="checkbox" value="" checked>
-              <label class="form-check-label" for="checkbox-product">
-                Product
-              </label>
-            </div>
-          </div>
-
       </div>
     </div>
   </section>
 
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
+      <div class="btn-group">
+        <button class="btn btn-secondary dropdown-toggle button-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter the Tasks
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="#">
+              <div class="form-check">
+                <input id="checkbox-film" class="form-check-input" type="checkbox" value="" checked>
+                <label class="form-check-label" for="checkbox-film">
+                  Film
+                </label>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">
+              <div class="form-check">
+                <input id="checkbox-restaurant" class="form-check-input" type="checkbox" value="" checked>
+                <label class="form-check-label" for="checkbox-restaurant">
+                  Restaurant
+                </label>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">
+              <div class="form-check">
+                <input id="checkbox-book" class="form-check-input" type="checkbox" value="" checked>
+                <label class="form-check-label" for="checkbox-book">
+                  Book
+                </label>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">
+              <div class="form-check">
+                <input id="checkbox-product" class="form-check-input" type="checkbox" value="" checked>
+                <label class="form-check-label" for="checkbox-product">
+                  Product
+                </label>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
+
+      <!--begin the each container-->
+      <h1 class="category-title-film">Film</h1>
+      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <div id="task-1" class="col task">
           <div class="card shadow-sm">
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <h5>Let's watch movie name</h5>
+              <p class="card-text">Todo task description</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary done-button">Done</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary edit-button">Edit Description</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle category-button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Change Category
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" data-category="film">Film</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="restaurant">Restaurant</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="book">Book</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="product">Product</a></li>
+                  </ul>
                 </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary save-button">Save</button>
                 <small class="text-body-secondary">9 mins</small>
               </div>
             </div>
@@ -286,6 +314,28 @@
 
 
 
+        <div id="task-2" class="col task">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button id="button-task-done" type="button" class="btn btn-sm btn-outline-secondary">Done</button>
+                  <button id="button-task-edit-des" type="button" class="btn btn-sm btn-outline-secondary edit-button">Edit Description</button>
+                </div>
+                <small class="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <h1 class="category-title-restaurant">Restaurant</h1>
+      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         <div class="col">
           <div class="card shadow-sm">
@@ -294,8 +344,53 @@
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button id="button-task-done" type="button" class="btn btn-sm btn-outline-secondary">Done</button>
-                  <button id="button-task-edit-des" type="button" class="btn btn-sm btn-outline-secondary">Edit Description</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Done</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary edit-button">Edit Description</button>
+                </div>
+                <small class="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <h1 class="category-title-book">Book</h1>
+      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Done</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary edit-button">Edit Description</button>
+                </div>
+                <small class="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <h1 class="category-title-product">Product</h1>
+      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Done</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary edit-button">Edit Description</button>
                 </div>
                 <small class="text-body-secondary">9 mins</small>
               </div>

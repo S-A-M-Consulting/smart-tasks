@@ -2,18 +2,14 @@
 .logout-container {
   display: flex;
   align-items: center;
+  margin-right: 30px;
 }
 
-.logout-container a {
+#nav-username {
   color: white;
   text-decoration: none; /* This removes the default underline for links */
-  margin-right: 10px; /* Adjust the margin as needed for spacing */
+   /* Adjust the margin as needed for spacing */
+  margin-right: 10px;
 }
 
-.logout-container button {
-  color: white;
-  background-color: transparent;
-  border: 1px solid white;
-  padding: 5px 10px; /* Adjust padding as needed */
-  cursor: pointer;
-}
+
