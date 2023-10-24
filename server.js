@@ -5,7 +5,9 @@ require("dotenv").config();
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
-const cookie_session = require('cookie-session');
+const cookieSession = require('cookie-session');
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -16,11 +18,12 @@ app.set("view engine", "ejs");
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: true }));
-app.use(cookie_session({
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieSession({
   name: 'session',
-  keys: ['key']
+  keys: [process.env.DB_PASS]
 }));
+app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(
   "/styles",
   sassMiddleware({
@@ -29,6 +32,7 @@ app.use(
     isSass: false, // false => scss, true => sass
   })
 );
+
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
