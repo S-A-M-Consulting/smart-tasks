@@ -10,15 +10,14 @@ $(document).ready(function () {
       return $.ajax({
         method: "POST",
         url: "/users/logout",
-      });
-      // .then((userId) => {
-      //   //remove cookie callback function
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
+      })
+        .then(() => {
+          let user = null;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
-
     logout();
   });
 
@@ -93,8 +92,6 @@ $(document).ready(function () {
 
   // to filter specific task categories - film
   $("#checkbox-film").on("change", function (event) {
-    // event.preventDefault();
-
     if ($(this).is(":checked")) {
       console.log("clicked");
     }
@@ -102,62 +99,45 @@ $(document).ready(function () {
 
   // to filter specific task categories - restaurant
   $("#checkbox-restaurant").on("click", function (event) {
-    event.preventDefault();
-
-    const filterTask = function (categoryId) {
-      return $.ajax({
-        method: "GET",
-        url: `/api/tasks/${categoryId}`,
-        data,
-      })
-        .then((data) => {
-          //renderMyTasks (or something similar)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    filterTask(2);
+    if ($(this).is(":checked")) {
+      console.log("clicked");
+    }
   });
 
   // to filter specific task categories - book
   $("#checkbox-book").on("click", function (event) {
-    event.preventDefault();
-
-    const filterTask = function (categoryId) {
-      return $.ajax({
-        method: "GET",
-        url: `/api/tasks/${categoryId}`,
-        data,
-      })
-        .then((data) => {
-          //renderMyTasks (or something similar)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    filterTask(3);
+    if ($(this).is(":checked")) {
+      console.log("clicked");
+    }
   });
 
   // to filter specific task categories - product
   $("#checkbox-product").on("click", function (event) {
     event.preventDefault();
+    if ($(this).is(":checked")) {
+      console.log("clicked");
+    }
+  });
 
-    const filterTask = function (categoryId) {
+  // login event
+  $("PLACEHOLDER").on("submit", function (event) {
+    event.preventDefault();
+
+    const logIn = function (data) {
       return $.ajax({
-        method: "GET",
-        url: `/api/tasks/${categoryId}`,
+        method: "POST",
+        url: "/users/login",
         data,
       })
-        .then((data) => {
-          //renderMyTasks (or something similar)
+        .then((userObj) => {
+          let user = userObj;
+          getMyTasks();
         })
         .catch((err) => {
           console.log(err);
         });
     };
-    filterTask(4);
+    logIn();
   });
 
   const getMyTasks = function () {
@@ -166,24 +146,24 @@ $(document).ready(function () {
       method: "GET",
     })
       .then((myTasks) => {
-        //renderMyTasks (for currently logged in user)
+        let orignalTasksArray = myTasks;
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-  const logIn = function (data) {
-    return $.ajax({
-      method: "POST",
-      url: "/users/login",
-      data,
-    })
-      .then((data) => {
-        getMyTasks();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // Don't know if needed
+  // const filterTask = function (categoryId) {
+  //   return $.ajax({
+  //     method: "GET",
+  //     url: `/api/tasks/${categoryId}`,
+  //     data,
+  //   })
+  //     .then((data) => {
+  //       //renderMyTasks (or something similar)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 });
