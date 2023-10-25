@@ -20,7 +20,7 @@ const editTask = (id, data) => {
 
 module.exports = {getTasksByUser, createTask, editTask};
 
-if (process.env.debug) {
-  getTasksByUser(1).then(data => console.log("1:", data));
-  getTasksByUser(2).then(data => console.log("2:", data));
-}
+// if (process.env.debug) {
+//   getTasksByUser(1).then(data => console.log("1:", data));
+//   getTasksByUser(2).then(data => console.log("2:", data));
+// }

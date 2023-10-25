@@ -20,10 +20,10 @@ const createNewCard = function (task) {
               Change Category
             </button>
              <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" data-category="1">Film</a></li>
-              <li><a class="dropdown-item" href="#" data-category="2">Restaurant</a></li>
-              <li><a class="dropdown-item" href="#" data-category="3">Book</a></li>
-              <li><a class="dropdown-item" href="#" data-category="4">Product</a></li>
+              <li><a class="dropdown-item dropdown-category" href="#" data-category="1">Film</a></li>
+              <li><a class="dropdown-item dropdown-category" href="#" data-category="2">Restaurant</a></li>
+              <li><a class="dropdown-item dropdown-category" href="#" data-category="3">Book</a></li>
+              <li><a class="dropdown-item dropdown-category" href="#" data-category="4">Product</a></li>
             </ul>
           </div>
           <button type="button" class="btn btn-sm btn-outline-secondary save-button">Save</button>
@@ -120,10 +120,12 @@ const renderTasks = function (tasks) {
   $('#tasks-container-product').empty().append(renderedTasks.products);
 
   $('button.done-button').on('click', handleDoneButton);
-  $('.dropdown-item').on('click', handleCategoryButton);
+  $('.dropdown-category').on('click', handleCategoryButton);
 };
 
 const handleFilterView = function (event) {
+  event.preventDefault();
+
   console.log('handling filter view');
   const $film = $('#tasks-container-film').hide();
   const $restaurant = $('#tasks-container-restaurant').hide();
@@ -160,16 +162,21 @@ const handleFilterView = function (event) {
 const handleNewTask = function (event) {
   event.preventDefault();
   const content = $('#newTask-text').val();
-  console.log('content:', content);
+
+  const newTask = {
+    user_id: USER_ID,
+    category_id: 1,
+    task_name: content,
+    is_complete: false
+  };
+
+
+  console.log('content:', newTask);
+
   $.ajax({
     method: 'POST',
     url: 'api/tasks',
-    data: {
-      user_id: USER_ID,
-      category_id: 1,
-      task_name: content,
-      is_complete: false
-    }
+    data: newTask
   }).then(task => {
     console.log(task);
     getMyTasks(USER_ID);
@@ -179,11 +186,11 @@ const handleNewTask = function (event) {
 
 const addNewTaskHandler = function () {
   // the submitting of a new task event
-  $(".newTask-text").on("submit", handleNewTask)
+  $(".newtask-form").on("submit", handleNewTask)
 };
 
 const addFilterTasksHandler = function () {
-  $('.dropdown-item').on('change', handleFilterView);
+  $('a.item-filter').on('change', handleFilterView);
 };
 
 $(document).ready(() => {
