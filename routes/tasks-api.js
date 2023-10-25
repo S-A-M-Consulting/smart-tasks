@@ -29,7 +29,6 @@ router.post('/', (req, res) => {
     .createTask(newTask)
     .then(task => {
       console.log('Created Task:', task.rows)
-      res.send(task);
     })
     .catch(e => console.log(e.message));
 });

@@ -160,16 +160,21 @@ const handleFilterView = function (event) {
 const handleNewTask = function (event) {
   event.preventDefault();
   const content = $('#newTask-text').val();
-  console.log('content:', content);
+
+  const newTask = {
+    user_id: USER_ID,
+    category_id: 1,
+    task_name: content,
+    is_complete: false
+  };
+
+
+  console.log('content:', newTask);
+
   $.ajax({
     method: 'POST',
     url: 'api/tasks',
-    data: {
-      user_id: USER_ID,
-      category_id: 1,
-      task_name: content,
-      is_complete: false
-    }
+    data: newTask
   }).then(task => {
     console.log(task);
     getMyTasks(USER_ID);
@@ -179,7 +184,7 @@ const handleNewTask = function (event) {
 
 const addNewTaskHandler = function () {
   // the submitting of a new task event
-  $(".newTask-text").on("submit", handleNewTask)
+  $(".newtask-form").on("submit", handleNewTask)
 };
 
 const addFilterTasksHandler = function () {
