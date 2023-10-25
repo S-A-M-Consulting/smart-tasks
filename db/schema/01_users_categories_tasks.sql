@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS tasks CASCADE;
 
+--Have hard coded users, no functionality to create at this point in time
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,

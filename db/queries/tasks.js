@@ -1,6 +1,6 @@
 //Authored by @mxtchjohnston
 const db = require('../connection');
-const { error, getAll, insert, update} = require('./util.js');
+const { error, getAll, insert, update, debug} = require('./util.js');
 
 const getTasksByUser = (user_id) => {
   return db.query('SELECT * FROM tasks WHERE user_id = $1 AND is_complete = FALSE', [user_id])
@@ -18,9 +18,12 @@ const editTask = (id, data) => {
     .catch(error('editTask', id, data));
 }
 
-module.exports = {getTasksByUser, createTask, editTask};
+const findNullTaskDescriptions = () => {
+  return db.query('SELECT * FROM tasks WHERE task_description IS NULL')
+    .then(getAll)
+    .catch(error('findNull'));
+}
+module.exports = {getTasksByUser, createTask, editTask, findNullTaskDescriptions};
 
-// if (process.env.debug) {
-//   getTasksByUser(1).then(data => console.log("1:", data));
-//   getTasksByUser(2).then(data => console.log("2:", data));
-// }
+findNullTaskDescriptions()
+//debug(() => console.log(findNullTaskDescriptions()));

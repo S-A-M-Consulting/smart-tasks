@@ -15,9 +15,4 @@ const getUserById = user_id => {
     .catch(error('getUserById'));
 }
 
-if (process.env.debug) {
-  getUsers().then(data => console.log("1:", data));
-  getUserById(2).then(data => console.log("2:", data));
-}
-
 module.exports = { getUsers, getUserById };

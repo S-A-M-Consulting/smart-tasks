@@ -4,14 +4,16 @@ const USER_ID = 1;
 const createNewCard = function (task) {
   const task_id = task.id;
   const task_name = task.task_name;
+  const task_description = task.task_description;
+  const task_image = task.url_image;
 
   const $template = $(`
   <div data-id=${task_id} id="task-id-${task_id}" class="col task">
     <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+      <img src=${task_image} alt="Thumbnail Image" width="100%" height="225">
         <div class="card-body">
          <h5>${task_name}</h5>
-         <p class="card-text">Todo task description</p>
+         <p class="card-text">${task_description}</p>
           <div class="d-flex justify-content-between align-items-center">
            <div class="btn-group">
             <button type="button" class="btn btn-sm btn-outline-secondary done-button">Done</button>
@@ -175,21 +177,25 @@ const handleFilterView = function (event) {
   }
 }
 
-// function to
+// function to create a task object for inserting into the database
 const makeTask = function(text) {
+  // simple category sorting based on key starting words
   const keywords = {
     'watch': 1,
     'eat': 2,
     'read': 3,
     'buy': 4,
-    'purchase': 4
+    'purchase': 4,
+    'get': 4
   };
 
+  // split text into an array
   const splitText = text.split(' ');
-
+  // search for starting keyword based on index 0
   let category_id = keywords[splitText[0].toLowerCase()];
   category_id = category_id ? category_id : 0; //If cateogry id exists, pass thru, otherwise set to 0;
 
+  // return new task object
   return {
     user_id: USER_ID,
     category_id,
@@ -198,33 +204,38 @@ const makeTask = function(text) {
   };
 }
 
+// adds the new task to the database via POST request
 const handleNewTask = function (event) {
-
   event.preventDefault();
-  const content = $('#newTask-text').val();
-  const newTask = makeTask(content);
 
-  console.log('content:', newTask);
+  // getting the text content from the textarea
+  const content = $('#newTask-text').val();
+  // making a new task element through template literals
+  const newTask = makeTask(content);
 
   $.ajax({
     method: 'POST',
     url: 'api/tasks',
     data: newTask
   }).then(task => {
+    // clears text area
     $("#newTask-text").val("");
+    // calls getMyTasks function which ultimately calls renderTasks to re-render the page with the newly created task
     getMyTasks(USER_ID);
   }).catch(err => console.log(err));
 
 }
-// function to add the event lister for submitting a new task
+// function to add the event listener for submitting a new task
 const addNewTaskHandler = function () {
   $("#newtask-form").on("submit", handleNewTask)
 };
 
+// function to add the event listener for filtering the view of taks by category
 const addFilterTasksHandler = function () {
   $('a.item-filter').on('change', handleFilterView);
 };
 
+// calls the functions once the documennt is ready
 $(document).ready(() => {
   getMyTasks();
   addNewTaskHandler();
