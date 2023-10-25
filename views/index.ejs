@@ -30,7 +30,7 @@
     <script src="/scripts/libraries/jquery-3.4.0.min.js"></script>
     <script src="/components/card.js"></script>
     <script src="/scripts/client.js"></script>
-    <script src="/scripts/task-edit-des.js"></script>
+
 
 
     <style>
@@ -218,11 +218,10 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Plan your next achievement here!</h1>
-        <form action="" method="" class="newtask-form">
+        <form class="newtask-form" id="newtask-form">
             <label for="newtask-form"></label>
             <div class="input-group">
-              <textarea id ="newTask-text" class="form-control" aria-label="With textarea" name="task_name"
-              id="task-input" placeholder="Write a New Task"></textarea>
+              <textarea id ="newTask-text" class="form-control" aria-label="With textarea" name="task_name" placeholder="Write a New Task"></textarea>
               <div class="button-submit">
                 <button id="button-submit-new" class="btn btn-primary" type="submit" value="Submit">Submit</button>
               </div>

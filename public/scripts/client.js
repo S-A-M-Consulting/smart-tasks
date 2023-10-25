@@ -162,7 +162,7 @@ const handleFilterView = function (event) {
 const handleNewTask = function (event) {
   event.preventDefault();
   const content = $('#newTask-text').val();
-
+  console.log('eneter handle block')
   const newTask = {
     user_id: USER_ID,
     category_id: 1,
@@ -178,7 +178,8 @@ const handleNewTask = function (event) {
     url: 'api/tasks',
     data: newTask
   }).then(task => {
-    console.log(task);
+    $("#newTask-text").val("");
+    console.log('entered then block');
     getMyTasks(USER_ID);
   }).catch(err => console.log(err));
 
@@ -186,7 +187,7 @@ const handleNewTask = function (event) {
 
 const addNewTaskHandler = function () {
   // the submitting of a new task event
-  $(".newtask-form").on("submit", handleNewTask)
+  $("#newtask-form").on("submit", handleNewTask)
 };
 
 const addFilterTasksHandler = function () {
