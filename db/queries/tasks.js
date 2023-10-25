@@ -3,7 +3,7 @@ const db = require('../connection');
 const { error, getAll, insert, update} = require('./util.js');
 
 const getTasksByUser = (user_id) => {
-  return db.query('SELECT * FROM tasks WHERE user_id = $1', [user_id])
+  return db.query('SELECT * FROM tasks WHERE user_id = $1 AND is_complete = FALSE', [user_id])
     .then(getAll)
     .catch(error(`getTasksByUser ${user_id}`));
 }

@@ -40,7 +40,7 @@ const createNewCard = function (task) {
 
 const handleDoneButton = function (event) {
   event.preventDefault();
-  const task_id = $(this).attr('data-id');
+  const task_id = $(this).closest('.task').attr('data-id');
 
   $.ajax({
     method: 'PATCH',
@@ -169,9 +169,7 @@ const renderTasks = function (tasks) {
     renderedTasks.push(newCard);
   }
   $('#tasks-container-film').empty().append(renderedTasks);
-  $('button.done-button').on('click', e => {
-    console.log('This is a log');
-  });
+  $('button.done-button').on('click', handleDoneButton);
 };
 
 const handleFilterView = function (event) {
