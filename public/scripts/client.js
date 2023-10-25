@@ -1,7 +1,6 @@
-//const orignalTasksArray = [];
 const USER_ID = 1;
 
-// render one task
+// function to create the HTML new task element using template literals
 const createNewCard = function (task) {
   const task_id = task.id;
   const task_name = task.task_name;
@@ -36,9 +35,10 @@ const createNewCard = function (task) {
   return $template;
 }
 
-
+// handles marking the task as complete (changing the is_complete boolean element in tasks database)
 const handleDoneButton = function (event) {
   event.preventDefault();
+  // grabs task class for the dynamically generated tasks
   const task_id = $(this).closest('.task').attr('data-id');
 
   $.ajax({
@@ -46,36 +46,36 @@ const handleDoneButton = function (event) {
     url: `/api/tasks/${task_id}`,
     data: {is_complete: true}
   }).then(changed_task => {
+    // calls getMyTasks if successful
     getMyTasks(USER_ID);
-    console.log(changed_task.rows);
   }).catch(err => console.log(err));
 };
 
+// similarly to the above done button, this allows users to change the task category_id in the tasks database
 const handleCategoryButton = function(event) {
   event.preventDefault();
   const task_id = $(this).closest('.task').attr('data-id');
   const category_id = $(this).attr('data-category');
-  // Get the data-category attribute of the clicked item
-  // const selectedCategory = $(this).getAttribute('data-category');
+  //using patch because it is only a partial change
   $.ajax({
     method: 'PATCH',
     url: `/api/tasks/${task_id}`,
     data: {category_id}
   }).then(changed_task => {
-    console.log(changed_task);
+    // calls getMyTasks if resolved
     getMyTasks(USER_ID);
   }).catch(err => console.log(err));
 
 };
 
-
+// GET request to grab all the tasks (based on user.id) from the database
 const getMyTasks = function (userID) {
   return $.ajax({
     url: "/api/tasks",
     method: "GET",
   })
     .then((myTasks) => {
-      console.log(myTasks);
+      // calls renderTasks if resolved
       renderTasks(myTasks);
     })
     .catch((err) => {
@@ -83,8 +83,10 @@ const getMyTasks = function (userID) {
     });
 };
 
+// function to append the tasks to their appropriate categories in the index.js
 const renderTasks = function (tasks) {
   console.log('tasks:', tasks);
+  // create empty arrays within an object for the tasks to be assigned into by category
   const renderedTasks = {
     films: [],
     restaurants: [],
@@ -92,9 +94,11 @@ const renderTasks = function (tasks) {
     products: []
   };
 
+  // for loop to interact with the individual tasks
   for (let task of tasks) {
+    // call createNewCard to generate the HTML for each individual task
     const newCard = createNewCard(task);
-
+    // push each task element in to the appropriate array based on category
     switch (task.category_id) {
       case 1:
         renderedTasks.films.push(newCard);
@@ -114,11 +118,14 @@ const renderTasks = function (tasks) {
         break;
     }
   }
+
+  // empty or clear out the various containers within the index.js to append the now categorized tasks
   $('#tasks-container-film').empty().append(renderedTasks.films);
   $('#tasks-container-restaurant').empty().append(renderedTasks.restaurants);
   $('#tasks-container-book').empty().append(renderedTasks.books);
   $('#tasks-container-product').empty().append(renderedTasks.products);
 
+  // add listener events to each
   $('button.done-button').on('click', handleDoneButton);
   $('.dropdown-category').on('click', handleCategoryButton);
 };
