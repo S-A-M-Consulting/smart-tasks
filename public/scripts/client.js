@@ -159,16 +159,35 @@ const handleFilterView = function (event) {
   }
 }
 
+const makeTask = function(text) {
+  const keywords = {
+    'watch': 1,
+    'eat': 2,
+    'read': 3,
+    'buy': 4,
+    'purchase': 4
+  };
+
+  const splitText = text.split(' ');
+
+  let category_id = keywords[splitText[0].toLowerCase()];
+  category_id = category_id ? category_id : 0; //If cateogry id exists, pass thru, otherwise set to 0;
+
+  return {
+    user_id: USER_ID,
+    category_id,
+    task_name: text,
+    is_complete: false
+  };
+}
+
 const handleNewTask = function (event) {
+
+
   event.preventDefault();
   const content = $('#newTask-text').val();
   console.log('eneter handle block')
-  const newTask = {
-    user_id: USER_ID,
-    category_id: 1,
-    task_name: content,
-    is_complete: false
-  };
+  const newTask = makeTask(content);
 
 
   console.log('content:', newTask);
@@ -198,5 +217,4 @@ $(document).ready(() => {
   getMyTasks();
   addNewTaskHandler();
   addFilterTasksHandler();
-
 });
