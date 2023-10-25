@@ -1,6 +1,7 @@
 //const orignalTasksArray = [];
 const USER_ID = 1;
 
+// render one task
 const createNewCard = function (task) {
   const task_id = task.id;
   const task_name = task.task_name;
@@ -36,8 +37,6 @@ const createNewCard = function (task) {
 }
 
 
-
-
 const handleDoneButton = function (event) {
   event.preventDefault();
   const task_id = $(this).closest('.task').attr('data-id');
@@ -54,97 +53,20 @@ const handleDoneButton = function (event) {
 
 const handleCategoryButton = function(event) {
   event.preventDefault();
+  const task_id = $(this).closest('.task').attr('data-id');
+  const category_id = $(this).attr('data-category');
+  // Get the data-category attribute of the clicked item
+  // const selectedCategory = $(this).getAttribute('data-category');
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/tasks/${task_id}`,
+    data: {category_id}
+  }).then(changed_task => {
+    console.log(changed_task);
+    getMyTasks(USER_ID);
+  }).catch(err => console.log(err));
 
 };
-
-// to mark a task as complete event
-$("#button-task-done").on("submit", function (event) {
-  event.preventDefault();
-
-  // this function can edit the task description itself aswell as mark it as complete
-  const editTask = function (taskId, data) {
-    return $.ajax({
-      method: "PATCH",
-      url: `/api/tasks/${taskId}`,
-      data,
-    });
-  };
-});
-
-// to delete a task event
-$("#button-task-delete").on("submit", function (event) {
-  event.preventDefault();
-
-  const deleteTask = function (taskId) {
-    return $.ajax({
-      method: "DELETE",
-      url: `/api/tasks/${taskId}`,
-    })
-      .then((deleteTask) => {
-        //renderMyTasks (or something similar)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-});
-
-// to filter specific task categories - film
-$("#checkbox-film").on("change", function (event) {
-  if ($(this).is(":checked")) {
-    console.log("clicked");
-    filteredTasksArray = orignalTasksArray.filter(
-      (task) =>
-        task.category_id === 2 ||
-        task.category_id === 3 ||
-        task.category_id === 4
-    );
-  }
-  renderTasks(filteredTasksArray);
-});
-
-// to filter specific task categories - restaurant
-$("#checkbox-restaurant").on("click", function (event) {
-  if ($(this).is(":checked")) {
-    console.log("clicked");
-  }
-});
-
-// to filter specific task categories - book
-$("#checkbox-book").on("click", function (event) {
-  if ($(this).is(":checked")) {
-    console.log("clicked");
-  }
-});
-
-// to filter specific task categories - product
-$("#checkbox-product").on("click", function (event) {
-  event.preventDefault();
-  if ($(this).is(":checked")) {
-    console.log("clicked");
-  }
-});
-
-// login event, FIX THIS
-$("PLACEHOLDER").on("submit", function (event) {
-  event.preventDefault();
-
-  const logIn = function (data) {
-    $.ajax({
-      method: "POST",
-      url: "/users/login",
-      data,
-    })
-      .then((userObj) => {
-        let user = userObj;
-        getMyTasks();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  logIn();
-});
 
 
 const getMyTasks = function (userID) {
@@ -163,13 +85,42 @@ const getMyTasks = function (userID) {
 
 const renderTasks = function (tasks) {
   console.log('tasks:', tasks);
-  const renderedTasks = [];
+  const renderedTasks = {
+    films: [],
+    restaurants: [],
+    books: [],
+    products: []
+  };
+
   for (let task of tasks) {
     const newCard = createNewCard(task);
-    renderedTasks.push(newCard);
+
+    switch (task.category_id) {
+      case 1:
+        renderedTasks.films.push(newCard);
+        break;
+      case 2:
+        renderedTasks.restaurants.push(newCard);
+          break;
+      case 3:
+        renderedTasks.books.push(newCard);
+
+          break;
+      case 4:
+        renderedTasks.products.push(newCard);
+          break;
+
+      default:
+        break;
+    }
   }
-  $('#tasks-container-film').empty().append(renderedTasks);
+  $('#tasks-container-film').empty().append(renderedTasks.films);
+  $('#tasks-container-restaurant').empty().append(renderedTasks.restaurants);
+  $('#tasks-container-book').empty().append(renderedTasks.books);
+  $('#tasks-container-product').empty().append(renderedTasks.products);
+
   $('button.done-button').on('click', handleDoneButton);
+  $('.dropdown-item').on('click', handleCategoryButton);
 };
 
 const handleFilterView = function (event) {
@@ -206,9 +157,29 @@ const handleFilterView = function (event) {
   }
 }
 
+const handleNewTask = function (event) {
+  event.preventDefault();
+  const content = $('#newTask-text').val();
+  console.log('content:', content);
+  $.ajax({
+    method: 'POST',
+    url: 'api/tasks',
+    data: {
+      user_id: USER_ID,
+      category_id: 1,
+      task_name: content,
+      is_complete: false
+    }
+  }).then(task => {
+    console.log(task);
+    getMyTasks(USER_ID);
+  }).catch(err => console.log(err));
+
+}
+
 const addNewTaskHandler = function () {
   // the submitting of a new task event
-  $(".newtask-form").on("submit", handleDoneButton)
+  $(".newTask-text").on("submit", handleNewTask)
 };
 
 const addFilterTasksHandler = function () {
@@ -219,6 +190,5 @@ $(document).ready(() => {
   getMyTasks();
   addNewTaskHandler();
   addFilterTasksHandler();
-
 
 });
