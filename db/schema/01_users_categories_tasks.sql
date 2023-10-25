@@ -19,5 +19,7 @@ CREATE TABLE tasks (
   user_id INTEGER REFERENCES users(id) NOT NULL DEFAULT 1,
   category_id INTEGER REFERENCES categories(id),
   task_name VARCHAR(255) NOT NULL,
+  task_description VARCHAR(1000),
+  url_image VARCHAR(255),
   is_complete BOOLEAN
 );

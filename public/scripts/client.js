@@ -25,7 +25,6 @@ const createNewCard = function (task) {
               <li><a class="dropdown-item dropdown-category" href="#" data-category="4">Product</a></li>
             </ul>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary save-button">Save</button>
           <small class="text-body-secondary">9 mins</small>
         </div>
       </div>
@@ -91,7 +90,8 @@ const renderTasks = function (tasks) {
     films: [],
     restaurants: [],
     books: [],
-    products: []
+    products: [],
+    uncategorized: []
   };
 
   // for loop to interact with the individual tasks
@@ -115,35 +115,44 @@ const renderTasks = function (tasks) {
           break;
 
       default:
+        renderedTasks.uncategorized.push(newCard);
         break;
     }
   }
 
   // empty or clear out the various containers within the index.js to append the now categorized tasks
+  $('#tasks-container-uncategorized').empty().append(renderedTasks.uncategorized);
   $('#tasks-container-film').empty().append(renderedTasks.films);
   $('#tasks-container-restaurant').empty().append(renderedTasks.restaurants);
   $('#tasks-container-book').empty().append(renderedTasks.books);
   $('#tasks-container-product').empty().append(renderedTasks.products);
 
-  // add listener events to each
+  // add event listens after everything is rendered to prevent the issue of having the listeners prior to the tasks being rendered
   $('button.done-button').on('click', handleDoneButton);
   $('.dropdown-category').on('click', handleCategoryButton);
 };
 
+// function to provide a filtered view of tasks by category
 const handleFilterView = function (event) {
   event.preventDefault();
 
-  console.log('handling filter view');
+  const $uncategorized = $('#tasks-container-uncategorized').hide();
   const $film = $('#tasks-container-film').hide();
   const $restaurant = $('#tasks-container-restaurant').hide();
   const $book = $('#tasks-container-book').hide();
   const $product = $('#tasks-container-product').hide();
 
+  $uncategorized.siblings('h1.category-title-uncategorized').hide();
   $film.siblings('h1.category-title-film').hide();
   $restaurant.siblings('h1.category-title-restaurant').hide();
   $book.siblings('h1.category-title-book').hide();
   $product.siblings('h1.category-title-product').hide();
 
+  // to hide or show the category container based on checkbox status
+  if($('#checkbox-uncategorized').is(":checked")){
+    $uncategorized.show();
+    $uncategorized.siblings('h1.category-title-uncategorized').show();
+  }
 
   if($('#checkbox-film').is(":checked")){
     $film.show();
@@ -157,15 +166,16 @@ const handleFilterView = function (event) {
 
   if($('#checkbox-book').is(":checked")) {
     $book.show()
-    $film.siblings('h1.category-title-book').show();
+    $book.siblings('h1.category-title-book').show();
   }
 
   if($('#checkbox-product').is(":checked")) {
     $product.show()
-    $film.siblings('h1.category-title-product').show();
+    $product.siblings('h1.category-title-product').show();
   }
 }
 
+// function to
 const makeTask = function(text) {
   const keywords = {
     'watch': 1,
@@ -190,12 +200,9 @@ const makeTask = function(text) {
 
 const handleNewTask = function (event) {
 
-
   event.preventDefault();
   const content = $('#newTask-text').val();
-  console.log('eneter handle block')
   const newTask = makeTask(content);
-
 
   console.log('content:', newTask);
 
@@ -205,14 +212,12 @@ const handleNewTask = function (event) {
     data: newTask
   }).then(task => {
     $("#newTask-text").val("");
-    console.log('entered then block');
     getMyTasks(USER_ID);
   }).catch(err => console.log(err));
 
 }
-
+// function to add the event lister for submitting a new task
 const addNewTaskHandler = function () {
-  // the submitting of a new task event
   $("#newtask-form").on("submit", handleNewTask)
 };
 

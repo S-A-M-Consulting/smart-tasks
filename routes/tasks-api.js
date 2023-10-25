@@ -9,6 +9,7 @@
 const express = require("express");
 const router = express.Router();
 const taskQueries = require('../db/queries/tasks');
+const { makeMovieAPICall } = require('../api/movie-api.js')
 
 router.get("/", (req, res) => {
   //const user_id = req.session.user_id;
@@ -21,9 +22,15 @@ router.get("/", (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  //const user_id = req.session.user_id;
   const newTask = req.body;
-  //newTask.user_id = user_id;
+
+  if (newTask.category_id === 1) {
+    makeMovieAPICall(newTask.taskName)
+      .then(info => {
+        newTask.task_description = info.overview;
+        newTask.url_image = `https://www.themoviedb.org/t/p/w1280${info.poster_path}`
+      })
+  }
 
   taskQueries
     .createTask(newTask)
