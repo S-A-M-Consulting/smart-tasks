@@ -1,7 +1,7 @@
 <!--Using Bootstrap for our really production-->
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
+  <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
+    <script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
 
     <!-- App internal CSS -->
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
@@ -26,6 +27,7 @@
 
     <!--internal JS-->
     <script src="/scripts/libraries/jquery-3.4.0.min.js"></script>
+    <script src="/components/card.js"></script>
     <script src="/scripts/client.js"></script>
     <script src="/scripts/task-edit-des.js"></script>
 
@@ -215,10 +217,10 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Plan your next achievement here!</h1>
-        <form action="/tweets/" method="POST" class="newtweet-form">
-            <label for="tweet-text"></label>
+        <form action="/api/tasks" method="POST" class="newtask-form">
+            <label for="newtask-form"></label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" name="text"
+              <textarea id ="newTask-text" class="form-control" aria-label="With textarea" name="task_name"
               id="task-input" placeholder="Write a New Task"></textarea>
               <div class="button-submit">
                 <button id="button-submit-new" class="btn btn-primary" type="submit" value="Submit">Submit</button>
@@ -282,7 +284,7 @@
 
       <!--begin the each container-->
       <h1 class="category-title-film">Film</h1>
-      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div id="tasks-container-film" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         <div id="task-1" class="col task">
           <div class="card shadow-sm">
@@ -335,7 +337,7 @@
 
 
       <h1 class="category-title-restaurant">Restaurant</h1>
-      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div id="tasks-container-restaurant" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         <div class="col">
           <div class="card shadow-sm">
@@ -358,7 +360,7 @@
 
 
       <h1 class="category-title-book">Book</h1>
-      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div id="tasks-container-book" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         <div class="col">
           <div class="card shadow-sm">
@@ -380,7 +382,7 @@
 
 
       <h1 class="category-title-product">Product</h1>
-      <div id="tasks-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div id="tasks-container-product" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         <div class="col">
           <div class="card shadow-sm">
