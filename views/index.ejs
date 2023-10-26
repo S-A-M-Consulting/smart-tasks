@@ -2,39 +2,63 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
   <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="With the Smart TODO List, managing your tasks is no longer a chore. Experience the convenience of automatic categorization and stay organized effortlessly. Say goodbye to the delays and lack of context—start using the Smart TODO List today.">
-    <meta name="author" content="Mitchell Johnston, Steve Fraser, Albert Huang">
-    <meta name="keywords" content="Lighthouse lab, bootcamp, web development">
-    <meta name="generator" content="Hugo 0.118.2">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="With the Smart TODO List, managing your tasks is no longer a chore. Experience the convenience of automatic categorization and stay organized effortlessly. Say goodbye to the delays and lack of context—start using the Smart TODO List today."
+    />
+    <meta
+      name="author"
+      content="Mitchell Johnston, Steve Fraser, Albert Huang"
+    />
+    <meta name="keywords" content="Lighthouse lab, bootcamp, web development" />
+    <meta name="generator" content="Hugo 0.118.2" />
     <title>Smart TODO List · Bootstrap v5.3</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/album/"
+    />
 
     <!--Bootstrap core CSS by using CDN-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
+    />
 
     <script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
     <!--Bootstrap core JS by using CDN-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
     <!-- App internal CSS -->
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/newtask.css" type="text/css" />
     <link rel="stylesheet" href="/styles/tasks.css" type="text/css" />
 
     <!--Font Awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <!--internal JS-->
     <script src="/scripts/libraries/jquery-3.4.0.min.js"></script>
     <script src="/components/card.js"></script>
     <script src="/scripts/client.js"></script>
-
-
 
     <style>
       .bd-placeholder-img {
@@ -54,10 +78,11 @@
       .b-example-divider {
         width: 100%;
         height: 3rem;
-        background-color: #537EAC;
+        background-color: #537eac;
         border: solid#537EAC;
         border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+          inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
       }
 
       .b-example-vr {
@@ -67,7 +92,7 @@
       }
 
       .bi {
-        vertical-align: -.125em;
+        vertical-align: -0.125em;
         fill: currentColor;
       }
 
@@ -114,231 +139,360 @@
         display: block !important;
       }
     </style>
-
-
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
-        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+        <path
+          d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+        />
       </symbol>
       <symbol id="circle-half" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
       </symbol>
       <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
-        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+        <path
+          d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"
+        />
+        <path
+          d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
+        />
       </symbol>
       <symbol id="sun-fill" viewBox="0 0 16 16">
-        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        <path
+          d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+        />
       </symbol>
     </svg>
     <!--Bootstrap default feature for change the website theme, dark color-->
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-              id="bd-theme"
-              type="button"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+    <div
+      class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle"
+    >
+      <button
+        class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        aria-label="Toggle theme (auto)"
+      >
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+          <use href="#circle-half"></use>
+        </svg>
         <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
       </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+      <ul
+        class="dropdown-menu dropdown-menu-end shadow"
+        aria-labelledby="bd-theme-text"
+      >
         <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="light"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#sun-fill"></use>
+            </svg>
             Light
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
           </button>
         </li>
         <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="dark"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#moon-stars-fill"></use>
+            </svg>
             Dark
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
           </button>
         </li>
         <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center active"
+            data-bs-theme-value="auto"
+            aria-pressed="true"
+          >
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#circle-half"></use>
+            </svg>
             Auto
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
           </button>
         </li>
       </ul>
     </div>
 
-
-
-
-
-
-
-
-
-
-<header data-bs-theme="dark">
-  <div class="collapse text-bg-dark" id="navbarHeader">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4>About</h4>
-          <p class="text-body-secondary">With the Smart TODO List, managing your tasks is no longer a chore. Experience the convenience of automatic categorization and stay organized effortlessly. Say goodbye to the delays and lack of context—start using the Smart TODO List today.</p>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <form class="form-signin">
-            <h1 class="h3 mb-3 font-weight-normal">Please Login in</h1>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-            <button id="button-login" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="navbar navbar-dark shadow-sm" id="navbar-properties">
-    <div class="container">
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-rocket" viewBox="0 0 16 16">
-          <path d="M8 8c.828 0 1.5-.895 1.5-2S8.828 4 8 4s-1.5.895-1.5 2S7.172 8 8 8Z"/>
-          <path d="M11.953 8.81c-.195-3.388-.968-5.507-1.777-6.819C9.707 1.233 9.23.751 8.857.454a3.495 3.495 0 0 0-.463-.315A2.19 2.19 0 0 0 8.25.064.546.546 0 0 0 8 0a.549.549 0 0 0-.266.073 2.312 2.312 0 0 0-.142.08 3.67 3.67 0 0 0-.459.33c-.37.308-.844.803-1.31 1.57-.805 1.322-1.577 3.433-1.774 6.756l-1.497 1.826-.004.005A2.5 2.5 0 0 0 2 12.202V15.5a.5.5 0 0 0 .9.3l1.125-1.5c.166-.222.42-.4.752-.57.214-.108.414-.192.625-.281l.198-.084c.7.428 1.55.635 2.4.635.85 0 1.7-.207 2.4-.635.067.03.132.056.196.083.213.09.413.174.627.282.332.17.586.348.752.57l1.125 1.5a.5.5 0 0 0 .9-.3v-3.298a2.5 2.5 0 0 0-.548-1.562l-1.499-1.83ZM12 10.445v.055c0 .866-.284 1.585-.75 2.14.146.064.292.13.425.199.39.197.8.46 1.1.86L13 14v-1.798a1.5 1.5 0 0 0-.327-.935L12 10.445ZM4.75 12.64C4.284 12.085 4 11.366 4 10.5v-.054l-.673.82a1.5 1.5 0 0 0-.327.936V14l.225-.3c.3-.4.71-.664 1.1-.861.133-.068.279-.135.425-.199ZM8.009 1.073c.063.04.14.094.226.163.284.226.683.621 1.09 1.28C10.137 3.836 11 6.237 11 10.5c0 .858-.374 1.48-.943 1.893C9.517 12.786 8.781 13 8 13c-.781 0-1.517-.214-2.057-.607C5.373 11.979 5 11.358 5 10.5c0-4.182.86-6.586 1.677-7.928.409-.67.81-1.082 1.096-1.32.09-.076.17-.135.236-.18Z"/>
-          <path d="M9.479 14.361c-.48.093-.98.139-1.479.139-.5 0-.999-.046-1.479-.139L7.6 15.8a.5.5 0 0 0 .8 0l1.079-1.439Z"/>
-        </svg>
-        <strong>Smart Task</strong>
-      </a>
-      <div class="logout-container ms-auto">
-        <a id="nav-username">Hello Mitch</a>
-      </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </div>
-</header>
-
-<main>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light"></h1>
-        <form class="newtask-form" id="newtask-form">
-            <label for="newtask-form"></label>
-            <div class="input-group">
-              <textarea id ="newTask-text" class="form-control" aria-label="With textarea" name="task_name" placeholder="Write a New Task"></textarea>
-              <div class="button-submit">
-                <button id="button-submit-new" class="btn btn-primary" type="submit" value="Submit">Submit</button>
-              </div>
+    <header data-bs-theme="dark">
+      <div class="collapse text-bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4>About</h4>
+              <p class="text-body-secondary">
+                With the Smart TODO List, managing your tasks is no longer a
+                chore. Experience the convenience of automatic categorization
+                and stay organized effortlessly. Say goodbye to the delays and
+                lack of context—start using the Smart TODO List today.
+              </p>
             </div>
-          </form>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <form class="form-signin">
+                <h1 class="h3 mb-3 font-weight-normal">Please Login in</h1>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input
+                  type="email"
+                  id="inputEmail"
+                  class="form-control"
+                  placeholder="Email address"
+                  required=""
+                  autofocus=""
+                />
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input
+                  type="password"
+                  id="inputPassword"
+                  class="form-control"
+                  placeholder="Password"
+                  required=""
+                />
+                <button
+                  id="button-login"
+                  class="btn btn-lg btn-primary btn-block"
+                  type="submit"
+                >
+                  Login
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <div class="album bg-body-tertiary">
-    <div class="container">
-      <div class="btn-group">
-        <button class="btn btn-secondary dropdown-toggle button-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Filter the Tasks
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <a class="dropdown-item item-filter" href="#">
-              <div class="form-check">
-                <input id="checkbox-uncategorized" class="form-check-input" type="checkbox" value="" checked>
-                <label class="form-check-label" for="checkbox-uncategorized">
-                  Uncategorized
-                </label>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item item-filter" href="#">
-              <div class="form-check">
-                <input id="checkbox-film" class="form-check-input" type="checkbox" value="" checked>
-                <label class="form-check-label" for="checkbox-film">
-                  Film
-                </label>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item item-filter" href="#">
-              <div class="form-check">
-                <input id="checkbox-restaurant" class="form-check-input" type="checkbox" value="" checked>
-                <label class="form-check-label" for="checkbox-restaurant">
-                  Restaurant
-                </label>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item item-filter" href="#">
-              <div class="form-check">
-                <input id="checkbox-book" class="form-check-input" type="checkbox" value="" checked>
-                <label class="form-check-label" for="checkbox-book">
-                  Book
-                </label>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item item-filter" href="#">
-              <div class="form-check">
-                <input id="checkbox-product" class="form-check-input" type="checkbox" value="" checked>
-                <label class="form-check-label" for="checkbox-product">
-                  Product
-                </label>
-              </div>
-            </a>
-          </li>
-        </ul>
+      <div class="navbar navbar-dark shadow-sm" id="navbar-properties">
+        <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="currentColor"
+              class="bi bi-rocket"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 8c.828 0 1.5-.895 1.5-2S8.828 4 8 4s-1.5.895-1.5 2S7.172 8 8 8Z"
+              />
+              <path
+                d="M11.953 8.81c-.195-3.388-.968-5.507-1.777-6.819C9.707 1.233 9.23.751 8.857.454a3.495 3.495 0 0 0-.463-.315A2.19 2.19 0 0 0 8.25.064.546.546 0 0 0 8 0a.549.549 0 0 0-.266.073 2.312 2.312 0 0 0-.142.08 3.67 3.67 0 0 0-.459.33c-.37.308-.844.803-1.31 1.57-.805 1.322-1.577 3.433-1.774 6.756l-1.497 1.826-.004.005A2.5 2.5 0 0 0 2 12.202V15.5a.5.5 0 0 0 .9.3l1.125-1.5c.166-.222.42-.4.752-.57.214-.108.414-.192.625-.281l.198-.084c.7.428 1.55.635 2.4.635.85 0 1.7-.207 2.4-.635.067.03.132.056.196.083.213.09.413.174.627.282.332.17.586.348.752.57l1.125 1.5a.5.5 0 0 0 .9-.3v-3.298a2.5 2.5 0 0 0-.548-1.562l-1.499-1.83ZM12 10.445v.055c0 .866-.284 1.585-.75 2.14.146.064.292.13.425.199.39.197.8.46 1.1.86L13 14v-1.798a1.5 1.5 0 0 0-.327-.935L12 10.445ZM4.75 12.64C4.284 12.085 4 11.366 4 10.5v-.054l-.673.82a1.5 1.5 0 0 0-.327.936V14l.225-.3c.3-.4.71-.664 1.1-.861.133-.068.279-.135.425-.199ZM8.009 1.073c.063.04.14.094.226.163.284.226.683.621 1.09 1.28C10.137 3.836 11 6.237 11 10.5c0 .858-.374 1.48-.943 1.893C9.517 12.786 8.781 13 8 13c-.781 0-1.517-.214-2.057-.607C5.373 11.979 5 11.358 5 10.5c0-4.182.86-6.586 1.677-7.928.409-.67.81-1.082 1.096-1.32.09-.076.17-.135.236-.18Z"
+              />
+              <path
+                d="M9.479 14.361c-.48.093-.98.139-1.479.139-.5 0-.999-.046-1.479-.139L7.6 15.8a.5.5 0 0 0 .8 0l1.079-1.439Z"
+              />
+            </svg>
+            <strong>Smart Task</strong>
+          </a>
+          <div class="logout-container ms-auto">
+            <a id="nav-username">Hello Mitch</a>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarHeader"
+            aria-controls="navbarHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
       </div>
+    </header>
 
+    <main>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light"></h1>
+            <form class="newtask-form" id="newtask-form">
+              <label for="newtask-form"></label>
+              <div class="input-group">
+                <textarea
+                  id="newTask-text"
+                  class="form-control"
+                  aria-label="With textarea"
+                  name="task_name"
+                  placeholder="Write a New Task"
+                ></textarea>
+                <div class="button-submit">
+                  <button
+                    id="button-submit-new"
+                    class="btn btn-primary"
+                    type="submit"
+                    value="Submit"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
 
-      <!--begin the each container-->
+      <div class="album bg-body-tertiary">
+        <div class="container">
+          <div class="btn-group">
+            <button
+              class="btn btn-secondary dropdown-toggle button-dropdown"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Filter the Tasks
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item item-filter" href="#">
+                  <div class="form-check">
+                    <input
+                      id="checkbox-uncategorized"
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      checked
+                    />
+                    <label
+                      class="form-check-label"
+                      for="checkbox-uncategorized"
+                    >
+                      Uncategorized
+                    </label>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item item-filter" href="#">
+                  <div class="form-check">
+                    <input
+                      id="checkbox-film"
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      checked
+                    />
+                    <label class="form-check-label" for="checkbox-film">
+                      Film
+                    </label>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item item-filter" href="#">
+                  <div class="form-check">
+                    <input
+                      id="checkbox-restaurant"
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      checked
+                    />
+                    <label class="form-check-label" for="checkbox-restaurant">
+                      Restaurant
+                    </label>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item item-filter" href="#">
+                  <div class="form-check">
+                    <input
+                      id="checkbox-book"
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      checked
+                    />
+                    <label class="form-check-label" for="checkbox-book">
+                      Book
+                    </label>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item item-filter" href="#">
+                  <div class="form-check">
+                    <input
+                      id="checkbox-product"
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      checked
+                    />
+                    <label class="form-check-label" for="checkbox-product">
+                      Product
+                    </label>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
 
+          <!--begin the each container-->
 
-      <h1 class="category-title-film">Film</h1>
-      <div id="tasks-container-film" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"></div>
+          <h1 class="category-title-film">Film</h1>
+          <div
+            id="tasks-container-film"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"
+          ></div>
 
+          <h1 class="category-title-restaurant">Restaurant</h1>
+          <div
+            id="tasks-container-restaurant"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"
+          ></div>
 
+          <h1 class="category-title-book">Book</h1>
+          <div
+            id="tasks-container-book"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"
+          ></div>
 
+          <h1 class="category-title-product">Product</h1>
+          <div
+            id="tasks-container-product"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"
+          ></div>
 
-      <h1 class="category-title-restaurant">Restaurant</h1>
-      <div id="tasks-container-restaurant" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"></div>
+          <h1 class="category-title-uncategorized">Uncategorized</h1>
+          <div
+            id="tasks-container-uncategorized"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"
+          ></div>
+        </div>
+      </div>
+    </main>
 
-
-
-
-      <h1 class="category-title-book">Book</h1>
-      <div id="tasks-container-book" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"></div>
-
-
-
-      <h1 class="category-title-product">Product</h1>
-      <div id="tasks-container-product" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"></div>
-
-      <h1 class="category-title-uncategorized">Uncategorized</h1>
-      <div id="tasks-container-uncategorized" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"></div>
-
-
-  </div>
-    </div>
-
-
-</main>
-
-<footer class="text-body-secondary py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
-  </div>
-</footer>
-    </body>
+    <footer class="text-body-secondary py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">&copy; S.A.M. 2023</p>
+      </div>
+    </footer>
+  </body>
 </html>
