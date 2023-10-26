@@ -1,52 +1,15 @@
 require("dotenv").config();
 const fetch = require('node-fetch');
-const { findNullTaskDescriptions, editTask } = require('../db/queries/tasks.js');
+const { editTask } = require('../db/queries/tasks.js');
 
 const urlEncode = string => string.split(' ').join('%20');
 
-const invokeApiCalls = function() {
-  findNullTaskDescriptions
-    .then(delegateApiCalls);
-}
-
-const delegateApiCalls = function (tasks) {
-  for (const task of tasks) {
-    if (task.category_id === 1) {
-      makeMovieAPICall(task.taskName)
-        .then(info => {
-          task.task_description = info.overview;
-          task.url_image = `https://www.themoviedb.org/t/p/w1280${info.poster_path}`;
-          return task;
-        }).then(task => {
-          editTask(task.id, task)
-        })
-        .catch(e => console.log(e.message));
-    }
-  }
-}
-
-
-const makeMovieAPICall = function (searchString) {
-  const url = `https://api.themoviedb.org/3/search/multi?query=${urlEncode(searchString)}&include_adult=false&language=en-US&page=1`;
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${process.env.API_MOVIE_BEARER_TOKEN}`
-    }
-  };
-
-  return fetch(url, options)
-    .then(res => res.json())
-    .then(json => json.results[0])
-    .catch(err => console.error('error:' + err));
-};
-
-async function fetchMovieInfo(searchString) {
+const makeMovieAPICall = async function (task) {
+  const name = task.task_name;
   try {
     // Construct the TMDb API URL with your API key
     const apiKey = process.env.API_MOVIE_KEY;
-    const encodedSearchString = encodeURIComponent(searchString);
+    const encodedSearchString = encodeURIComponent(name);
     const url = `https://api.themoviedb.org/3/search/multi?query=${encodedSearchString}&include_adult=false&language=en-US&page=1&api_key=${apiKey}`;
 
     // Make the API request and await the response
@@ -65,15 +28,58 @@ async function fetchMovieInfo(searchString) {
 
     // Get the first result
     const movieInfo = data.results[0];
-    console.log(movieInfo);
-    return movieInfo;
+    //console.log(movieInfo);
+    const updateObj = {
+      task_description: movieInfo.overview,
+      url_image: `https://www.themoviedb.org/t/p/w1280${movieInfo.poster_path}`
+    };
+
+    await editTask(task.id, updateObj);
+
   } catch (error) {
     console.error('Error fetching movie information:', error);
     throw error; // Rethrow the error for the caller to handle
   }
 }
 
-//makeAPICall('What We do in the shadows');
-module.exports = { invokeApiCalls };
+const makeBookAPICall = async function (task) {
+  const name = task.task_name;
+  try {
+    // Construct the open library API URL
+    const queryString = name.split(' ').join('+')
+    const url = `https://openlibrary.org/search.json?title=${queryString}&limit=1`;
 
-console.log(fetchMovieInfo('The matrix'));
+      // Make the API request and await the response
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from open library. Status: ${response.status}`);
+    }
+
+  // Parse the response as JSON
+  const data = await response.json();
+
+  // Check if there are results
+  if (data.docs.length === 0) {
+    throw new Error(`No results found for "${queryString}" on open library.`);
+  }
+
+  // Get the first result
+  const bookInfo = data.docs[0];
+  const isbn = bookInfo.isbn[0];
+  const imageResponse = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
+
+  //console.log(imageResponse);
+  const updateObj = {
+    task_description: bookInfo.first_sentence[0],
+    url_image: imageResponse
+  };
+
+  await editTask(task.id, updateObj);
+
+  } catch (error) {
+  console.error('Error fetching movie information:', error);
+  throw error; // Rethrow the error for the caller to handle
+  }
+}
+
+module.exports = {makeMovieAPICall, makeBookAPICall};

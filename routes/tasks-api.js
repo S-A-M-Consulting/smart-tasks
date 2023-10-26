@@ -10,7 +10,7 @@ const express = require("express");
 const router = express.Router();
 const taskQueries = require('../db/queries/tasks');
 const fetch = require('node-fetch');
-const { invokeApiCalls } = require('../api/external-api.js')
+const { } = require('../api/external-api.js')
 
 
 router.get("/", (req, res) => {
@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 
 router.post('/', (req, res) => {
   const newTask = req.body;
-
+  
   taskQueries
     .createTask(newTask)
     .then(task => {

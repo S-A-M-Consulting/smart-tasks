@@ -7,6 +7,7 @@ const chalk = require('chalk');
 const db = require('../db/connection');
 const { editTask } = require('../db/queries/tasks.js')
 const fetch = require('node-fetch');
+const {makeMovieAPICall, makeBookAPICall} = require('../api/external-api');
 // PG connection setup
 // const connectionString = process.env.DATABASE_URL ||
 //   `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?sslmode=disable`;
@@ -41,42 +42,16 @@ const addMovieInfo = async () => {
   //console.log(movies.rows[0].id);
   const shows = dbResponse.rows;
   for (const show of shows) {
-    const name = show.task_name;
-    console.log(show);
-    try {
-      // Construct the TMDb API URL with your API key
-      const apiKey = process.env.API_MOVIE_KEY;
-      const encodedSearchString = encodeURIComponent(name);
-      const url = `https://api.themoviedb.org/3/search/multi?query=${encodedSearchString}&include_adult=false&language=en-US&page=1&api_key=${apiKey}`;
+    await makeMovieAPICall(show);
+  }
+}
 
-      // Make the API request and await the response
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch data from TMDb. Status: ${response.status}`);
-      }
+const addBookInfo = async () => {
+  console.log(chalk.cyan(`-> Loading book info ...`));
+  const dbResponse = await db.query('SELECT * FROM tasks WHERE category_id = 3');
 
-      // Parse the response as JSON
-      const data = await response.json();
-
-      // Check if there are results
-      if (data.results.length === 0) {
-        throw new Error(`No results found for "${searchString}" on TMDb.`);
-      }
-
-      // Get the first result
-      const movieInfo = data.results[0];
-      //console.log(movieInfo);
-      const updateObj = {
-        task_description: movieInfo.overview,
-        url_image: `https://www.themoviedb.org/t/p/w1280${movieInfo.poster_path}`
-      }
-
-      await editTask(show.id, updateObj);
-
-    } catch (error) {
-      console.error('Error fetching movie information:', error);
-      throw error; // Rethrow the error for the caller to handle
-    }
+  for(const book of dbResponse.rows) {
+    await makeBookAPICall(book);
   }
 }
 
@@ -88,6 +63,7 @@ const runResetDB = async () => {
     await runSchemaFiles();
     await runSeedFiles();
     await addMovieInfo();
+    await addBookInfo();
     process.exit();
   } catch (err) {
     console.error(chalk.red(`Failed due to error: ${err}`));

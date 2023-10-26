@@ -22,7 +22,7 @@ INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 2, '
 -- Tasks table seed  to_read (category 3)
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 3, 'Twilight', FALSE);
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 3, 'Dune', FALSE);
-INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 3, 'Animal Farm', FALSE);
+INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 3, 'Blink', FALSE);
 
 -- Tasks table seed  to_buy (category 4)
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 4, 'Socks', FALSE);
