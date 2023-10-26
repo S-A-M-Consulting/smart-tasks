@@ -23,8 +23,8 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
-  const newTask = req.body;
+router.post('/', async (req, res) => {
+  const newTask = await delegateCategorize(req.body);
 
   taskQueries
     .createTask(newTask)

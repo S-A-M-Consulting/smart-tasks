@@ -1,13 +1,12 @@
 require("dotenv").config();
 const fetch = require('node-fetch');
-const { editTask } = require('../db/queries/tasks.js');
 
 const makeMovieAPICall = async function (task) {
-  const name = task.task_name;
+
   try {
     // Construct the TMDb API URL with your API key
     const apiKey = process.env.API_MOVIE_KEY;
-    const encodedSearchString = encodeURIComponent(name);
+    const encodedSearchString = encodeURIComponent(task.task_name);
     const url = `https://api.themoviedb.org/3/search/multi?query=${encodedSearchString}&include_adult=false&language=en-US&page=1&api_key=${apiKey}`;
 
     // Make the API request and await the response
@@ -21,18 +20,17 @@ const makeMovieAPICall = async function (task) {
 
     // Check if there are results
     if (data.results.length === 0) {
-      throw new Error(`No results found for "${name}" on TMDb.`);
+      throw new Error(`No results found for "${task.task_name}" on TMDb.`);
     }
 
     // Get the first result
     const movieInfo = data.results[0];
-    //console.log(movieInfo);
-    const updateObj = {
-      task_description: movieInfo.overview,
-      url_image: `https://www.themoviedb.org/t/p/w1280${movieInfo.poster_path}`
-    };
 
-    await editTask(task.id, updateObj);
+
+    task.task_description = movieInfo.overview;
+    task.url_image = `https://www.themoviedb.org/t/p/w1280${movieInfo.poster_path}`;
+
+    return task;
 
   } catch (error) {
     console.error('Error fetching movie information:', error);
@@ -67,12 +65,11 @@ const makeBookAPICall = async function (task) {
   const imageResponse = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
 
   //console.log(imageResponse);
-  const updateObj = {
-    task_description: bookInfo.first_sentence[0],
-    url_image: imageResponse
-  };
 
-  await editTask(task.id, updateObj);
+  task.task_description = bookInfo.first_sentence[0];
+  task.url_image = imageResponse;
+
+  return task;
 
   } catch (error) {
   console.error('Error fetching movie information:', error);
@@ -113,13 +110,11 @@ const makeYelpAPICall = async function (task) {
     // Get the first result
     const yelpInfo = data.businesses[0];
     //console.log(movieInfo);
-    const updateObj = {
-      task_description: yelpInfo.categories[0].title,
-      url_image: yelpInfo.image_url
-    };
 
-    await editTask(task.id, updateObj);
+    task.task_description = yelpInfo.categories[0].title;
+    task.url_image = yelpInfo.image_url;
 
+    return task;
   } catch (error) {
     console.error('Error fetching yelp information:', error);
     throw error; // Rethrow the error for the caller to handle
@@ -159,12 +154,11 @@ const makeProductAPICall = async function (task) {
 
 
     //console.log(imageResponse);
-    const updateObj = {
-      task_description: productInfo,
-      url_image: productImg
-    };
 
-    await editTask(task.id, updateObj);
+    task.task_description = productInfo;
+    task.url_image = productImg;
+
+    return task;
   } catch (error) {
     console.error("Error fetching product information:", error);
     throw error; // Rethrow the error for the caller to handle
@@ -187,21 +181,35 @@ const makeRandomPhotoAPICall = async function (task) {
     // Parse the response as JSON
     const data = await response.json();
 
+    if (data.results.length === 0) {
+      throw new Error(`No results found for "${task.task_name}" on unsplash`);
+    }
+
     const image = data.results[0].small;
     const description = '';
 
-    const updateObj = {
-      task_description: description,
-      url_image: image
-    };
+    task.task_description = description,
+    task.url_image = image
 
-    await editTask(task.id, updateObj);
-  } catch (error) {
+    return task;
+    } catch (error) {
     console.log(error);
     throw error;
   }
 }
 
+const delegateCategorize = async (task) => {
+  const delegation = [
+    makeRandomPhotoAPICall,
+    makeMovieAPICall,
+    makeYelpAPICall,
+    makeBookAPICall,
+    makeProductAPICall
+  ];
+  const selectedFunc = delegation[task.category_id];
+
+  return await selectedFunc(task);
+};
 
 
-module.exports = {makeMovieAPICall, makeBookAPICall, makeProductAPICall, makeYelpAPICall, makeRandomPhotoAPICall};
+module.exports = { delegateCategorize };

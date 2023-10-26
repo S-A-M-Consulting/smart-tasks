@@ -2,15 +2,11 @@
 require("dotenv").config();
 
 // other dependencies
-const fs = require("fs");
-const chalk = require("chalk");
-const db = require("../db/connection");
-const {
-  makeMovieAPICall,
-  makeBookAPICall,
-  makeYelpAPICall,
-  makeProductAPICall,
-} = require("../api/external-api");
+const fs = require('fs');
+const chalk = require('chalk');
+const db = require('../db/connection');
+const { delegateCategorize } = require('../api/external-api');
+const { update } = require('../db/queries/util');
 
 // PG connection setup
 // const connectionString = process.env.DATABASE_URL ||
@@ -40,47 +36,15 @@ const runSeedFiles = async () => {
   }
 };
 
-const addMovieInfo = async () => {
-  console.log(chalk.cyan(`-> Loading film info ...`));
-  const dbResponse = await db.query(
-    "SELECT * FROM tasks WHERE category_id = 1"
-  );
-  //console.log(movies.rows[0].id);
-  const shows = dbResponse.rows;
-  for (const show of shows) {
-    await makeMovieAPICall(show);
-  }
-};
+const addExternalInfo = async () => {
+  console.log(chalk.cyan(`-> Loading external info ...`));
+  const dbResponse = await db.query('SELECT * FROM tasks');
 
-const addBookInfo = async () => {
-  console.log(chalk.cyan(`-> Loading book info ...`));
-  const dbResponse = await db.query(
-    "SELECT * FROM tasks WHERE category_id = 3"
-  );
-
-  for (const book of dbResponse.rows) {
-    await makeBookAPICall(book);
+  for (const result of dbResponse.rows) {
+    const updatedTask = await delegateCategorize(result);
+    await update(db, 'tasks', updatedTask.id, updatedTask);
   }
-};
-
-const addYelpInfo = async () => {
-  const dbResponse = await db.query(
-    "SELECT * FROM tasks WHERE category_id = 2"
-  );
-  for (const yelp of dbResponse.rows) {
-    await makeYelpAPICall(yelp);
-  }
-};
-const addProductInfo = async () => {
-  console.log(chalk.cyan(`-> Loading product info ...`));
-  const dbResponse = await db.query(
-    "SELECT * FROM tasks WHERE category_id = 4"
-  );
-
-  for (const book of dbResponse.rows) {
-    await makeProductAPICall(book);
-  }
-};
+}
 
 const runResetDB = async () => {
   try {
@@ -91,10 +55,7 @@ const runResetDB = async () => {
 
     await runSchemaFiles();
     await runSeedFiles();
-    await addMovieInfo();
-    await addBookInfo();
-    await addYelpInfo();
-    await addProductInfo();
+    await addExternalInfo();
     process.exit();
   } catch (err) {
     console.error(chalk.red(`Failed due to error: ${err}`));
