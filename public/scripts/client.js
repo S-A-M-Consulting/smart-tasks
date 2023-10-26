@@ -195,11 +195,13 @@ const makeTask = function(text) {
   let category_id = keywords[splitText[0].toLowerCase()];
   category_id = category_id ? category_id : 0; //If cateogry id exists, pass thru, otherwise set to 0;
 
-  // return new task object
+  // return categorized new task object
   return {
     user_id: USER_ID,
     category_id,
-    task_name: text,
+    task_description: "How should I know what this is?",
+    url_image: "PLACEHOLDER URL",
+    task_name: category_id === 0 ? text : splitText.splice(1).join(' '),
     is_complete: false
   };
 }
