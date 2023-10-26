@@ -18,12 +18,5 @@ const editTask = (id, data) => {
     .catch(error('editTask', id, data));
 }
 
-const findNullTaskDescriptions = () => {
-  return db.query('SELECT * FROM tasks WHERE task_description IS NULL')
-    .then(getAll)
-    .catch(error('findNull'));
-}
-module.exports = {getTasksByUser, createTask, editTask, findNullTaskDescriptions};
+module.exports = {getTasksByUser, createTask, editTask};
 
-findNullTaskDescriptions()
-//debug(() => console.log(findNullTaskDescriptions()));

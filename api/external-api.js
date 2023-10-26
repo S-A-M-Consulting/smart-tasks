@@ -23,7 +23,7 @@ const makeMovieAPICall = async function (task) {
 
     // Check if there are results
     if (data.results.length === 0) {
-      throw new Error(`No results found for "${searchString}" on TMDb.`);
+      throw new Error(`No results found for "${name}" on TMDb.`);
     }
 
     // Get the first result
@@ -82,4 +82,95 @@ const makeBookAPICall = async function (task) {
   }
 }
 
-module.exports = {makeMovieAPICall, makeBookAPICall};
+const makeYelpAPICall = async function (task) {
+  const name = task.task_name;
+  try {
+    // Construct the TMDb API URL with your API key
+    const apiKey = process.env.API_YELP_KEY;
+    const encodedSearchString = encodeURIComponent(name);
+    const url = `https://api.yelp.com/v3/businesses/search?location=Vancouver&term=${encodedSearchString}&limit=1`;
+                `https://api.yelp.com/v3/businesses/search?location=Vancouver&term=${encodedSearchString}&limit=1`
+
+    const options = {
+      headers: {
+      accept: 'application/json',
+      Authorization: `Bearer P21WYCUYLBDqYWoiLts1HYmqnq8LHDidv_C-F69dJUcAYTHXOikbjFYklPF1K7unXNXldi3hLbUGzsWuUWm_UNJwNLGbfBnQf0Ac_uxQTJ3SHGUNupWnxQkAtcw5ZXYx`
+      }
+    }
+    // Make the API request and await the response
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from Yelp. Status: ${response.status}`);
+    }
+
+    // Parse the response as JSON
+    const data = await response.json();
+
+    // Check if there are results
+    if (data.businesses.length === 0) {
+      throw new Error(`No results found for "${name}" on TMDb.`);
+    }
+
+    // Get the first result
+    const yelpInfo = data.businesses[0];
+    //console.log(movieInfo);
+    const updateObj = {
+      task_description: yelpInfo.categories[0].title,
+      url_image: yelpInfo.image_url
+    };
+
+    await editTask(task.id, updateObj);
+
+  } catch (error) {
+    console.error('Error fetching yelp information:', error);
+    throw error; // Rethrow the error for the caller to handle
+  }
+}
+
+const makeProductAPICall = async function (task) {
+  const name = task.task_name;
+  try {
+    // Construct the open library API URL
+    const queryString = name.split(" ").join("+");
+    const apiKey = process.env.API_SHOPPING_KEY;
+    const searchEngine = "google_shopping";
+
+    const url = `https://serpapi.com/search.json?engine=${searchEngine}&q=${queryString}&serp_api_key=${apiKey}`;
+
+
+    // Make the API request and await the response
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch data from open library. Status: ${response.status}`
+      );
+    }
+
+    // Parse the response as JSON
+    const data = await response.json();
+
+    // Check if there are results
+    if (data.shopping_results.length === 0) {
+      throw new Error(`No results found for "${queryString}" on open library.`);
+    }
+
+    // Get the first result
+    const productInfo = data.shopping_results[0].title;
+    const productImg = data.shopping_results[0].thumbnail;
+
+
+    //console.log(imageResponse);
+    const updateObj = {
+      task_description: productInfo,
+      url_image: productImg
+    };
+
+    await editTask(task.id, updateObj);
+  } catch (error) {
+    console.error("Error fetching product information:", error);
+    throw error; // Rethrow the error for the caller to handle
+  }
+};
+
+module.exports = {makeMovieAPICall, makeBookAPICall, makeProductAPICall, makeYelpAPICall};
