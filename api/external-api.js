@@ -82,4 +82,50 @@ const makeBookAPICall = async function (task) {
   }
 }
 
-module.exports = {makeMovieAPICall, makeBookAPICall};
+
+const makeProductAPICall = async function (task) {
+  const name = task.task_name;
+  try {
+    // Construct the open library API URL
+    const queryString = name.split(" ").join("+");
+    const apiKey = process.env.API_SHOPPING_KEY;
+    const searchEngine = "google_shopping";
+
+    const url = `https://serpapi.com/search.json?engine=${searchEngine}&q=${queryString}&serp_api_key=${apiKey}`;
+
+
+    // Make the API request and await the response
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch data from open library. Status: ${response.status}`
+      );
+    }
+
+    // Parse the response as JSON
+    const data = await response.json();
+
+    // Check if there are results
+    if (data.shopping_results.length === 0) {
+      throw new Error(`No results found for "${queryString}" on open library.`);
+    }
+
+    // Get the first result
+    const productInfo = data.shopping_results[0].title;
+    const productImg = data.shopping_results[0].thumbnail;
+
+
+    //console.log(imageResponse);
+    const updateObj = {
+      task_description: productInfo,
+      url_image: productImg
+    };
+
+    await editTask(task.id, updateObj);
+  } catch (error) {
+    console.error("Error fetching movie information:", error);
+    throw error; // Rethrow the error for the caller to handle
+  }
+};
+
+module.exports = { makeMovieAPICall, makeBookAPICall, makeProductAPICall };
