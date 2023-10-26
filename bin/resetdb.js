@@ -5,7 +5,9 @@ require('dotenv').config();
 const fs = require('fs');
 const chalk = require('chalk');
 const db = require('../db/connection');
-
+const { editTask } = require('../db/queries/tasks.js')
+const fetch = require('node-fetch');
+const {makeMovieAPICall, makeBookAPICall} = require('../api/external-api');
 // PG connection setup
 // const connectionString = process.env.DATABASE_URL ||
 //   `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?sslmode=disable`;
@@ -34,6 +36,25 @@ const runSeedFiles = async () => {
   }
 };
 
+const addMovieInfo = async () => {
+  console.log(chalk.cyan(`-> Loading film info ...`));
+  const dbResponse = await db.query('SELECT * FROM tasks WHERE category_id = 1');
+  //console.log(movies.rows[0].id);
+  const shows = dbResponse.rows;
+  for (const show of shows) {
+    await makeMovieAPICall(show);
+  }
+}
+
+const addBookInfo = async () => {
+  console.log(chalk.cyan(`-> Loading book info ...`));
+  const dbResponse = await db.query('SELECT * FROM tasks WHERE category_id = 3');
+
+  for(const book of dbResponse.rows) {
+    await makeBookAPICall(book);
+  }
+}
+
 const runResetDB = async () => {
   try {
     process.env.DB_HOST &&
@@ -41,6 +62,8 @@ const runResetDB = async () => {
 
     await runSchemaFiles();
     await runSeedFiles();
+    await addMovieInfo();
+    await addBookInfo();
     process.exit();
   } catch (err) {
     console.error(chalk.red(`Failed due to error: ${err}`));

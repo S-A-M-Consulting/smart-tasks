@@ -9,8 +9,12 @@
 const express = require("express");
 const router = express.Router();
 const taskQueries = require('../db/queries/tasks');
+const fetch = require('node-fetch');
+const { } = require('../api/external-api.js')
+
 
 router.get("/", (req, res) => {
+  //invokeApiCalls();
   //const user_id = req.session.user_id;
   const user_id = 1;
   taskQueries
@@ -21,14 +25,13 @@ router.get("/", (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  //const user_id = req.session.user_id;
   const newTask = req.body;
-  //newTask.user_id = user_id;
-
+  
   taskQueries
     .createTask(newTask)
     .then(task => {
       console.log('Created Task:', task.rows)
+      res.send(task);
     })
     .catch(e => console.log(e.message));
 });
