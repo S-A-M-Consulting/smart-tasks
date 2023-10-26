@@ -1,5 +1,5 @@
 .button-dropdown {
-  background-color: rgb(3, 127, 138);
+  background-color: #537EAC;
   color: white; /* Text color in the dropdown button */
   padding: 5px 10px; /* Adjust padding as needed to make it smaller */
   font-size: 14px; /* Adjust font size as needed to make it smaller */
@@ -10,7 +10,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: orange; /* Change the text color to a custom color */
+  color: #AC8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -20,7 +20,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: green; /* Change the text color to a custom color */
+  color: #AC8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -29,7 +29,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: purple; /* Change the text color to a custom color */
+  color: #AC8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -38,7 +38,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: red; /* Change the text color to a custom color */
+  color: #AC8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -48,7 +48,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: rgb(0, 0, 0); /* Change the text color to a custom color */
+  color: #AC8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -80,3 +80,9 @@
 .bi-rocket {
   margin-right: 10px;
 }
+
+#no-scroll {
+  overflow:hidden;
+}
+
+

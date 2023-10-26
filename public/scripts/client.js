@@ -14,7 +14,7 @@ const createNewCard = function (task) {
         <div class="card-body">
           <div class="card-title-des">
             <h5>${task_name}</h5>
-            <p class="card-text">${task_description}</p>
+            <p class="card-text no-scroll">${task_description}</p>
           </div>
           <div class="d-flex justify-content-between align-items-center">
            <div class="btn-group">
