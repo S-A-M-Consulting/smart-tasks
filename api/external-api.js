@@ -23,7 +23,7 @@ const makeMovieAPICall = async function (task) {
 
     // Check if there are results
     if (data.results.length === 0) {
-      throw new Error(`No results found for "${searchString}" on TMDb.`);
+      throw new Error(`No results found for "${name}" on TMDb.`);
     }
 
     // Get the first result
@@ -82,6 +82,51 @@ const makeBookAPICall = async function (task) {
   }
 }
 
+const makeYelpAPICall = async function (task) {
+  const name = task.task_name;
+  try {
+    // Construct the TMDb API URL with your API key
+    const apiKey = process.env.API_YELP_KEY;
+    const encodedSearchString = encodeURIComponent(name);
+    const url = `https://api.yelp.com/v3/businesses/search?location=Vancouver&term=${encodedSearchString}&limit=1`;
+
+
+    const options = {
+      headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${apiKey}`
+      }
+    }
+    // Make the API request and await the response
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from Yelp. Status: ${response.status}`);
+    }
+
+    // Parse the response as JSON
+    const data = await response.json();
+
+    // Check if there are results
+    if (data.businesses.length === 0) {
+      throw new Error(`No results found for "${name}" on TMDb.`);
+    }
+
+    // Get the first result
+    const yelpInfo = data.businesses[0];
+    //console.log(movieInfo);
+    const updateObj = {
+      task_description: yelpInfo.categories[0].title,
+      url_image: yelpInfo.image_url
+    };
+
+    await editTask(task.id, updateObj);
+
+  } catch (error) {
+    console.error('Error fetching yelp information:', error);
+    throw error; // Rethrow the error for the caller to handle
+  }
+}
 
 const makeProductAPICall = async function (task) {
   const name = task.task_name;
@@ -123,9 +168,9 @@ const makeProductAPICall = async function (task) {
 
     await editTask(task.id, updateObj);
   } catch (error) {
-    console.error("Error fetching movie information:", error);
+    console.error("Error fetching product information:", error);
     throw error; // Rethrow the error for the caller to handle
   }
 };
 
-module.exports = { makeMovieAPICall, makeBookAPICall, makeProductAPICall };
+module.exports = {makeMovieAPICall, makeBookAPICall, makeProductAPICall, makeYelpAPICall};

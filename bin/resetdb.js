@@ -5,13 +5,8 @@ require('dotenv').config();
 const fs = require('fs');
 const chalk = require('chalk');
 const db = require('../db/connection');
-const { editTask } = require('../db/queries/tasks.js')
-const fetch = require('node-fetch');
-const {
-  makeMovieAPICall,
-  makeBookAPICall,
-  makeProductAPICall,
-} = require("../api/external-api");
+const {makeMovieAPICall, makeBookAPICall, makeYelpAPICall, makeProductAPICall} = require('../api/external-api');
+
 // PG connection setup
 // const connectionString = process.env.DATABASE_URL ||
 //   `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?sslmode=disable`;
@@ -59,17 +54,6 @@ const addBookInfo = async () => {
   }
 }
 
-const addProductInfo = async () => {
-  console.log(chalk.cyan(`-> Loading product info ...`));
-  const dbResponse = await db.query(
-    "SELECT * FROM tasks WHERE category_id = 4"
-  );
-
-  for (const book of dbResponse.rows) {
-    await makeProductAPICall(book);
-  }
-};
-
 const runResetDB = async () => {
   try {
     process.env.DB_HOST &&
@@ -79,7 +63,6 @@ const runResetDB = async () => {
     await runSeedFiles();
     await addMovieInfo();
     await addBookInfo();
-    await addProductInfo();
     process.exit();
   } catch (err) {
     console.error(chalk.red(`Failed due to error: ${err}`));
