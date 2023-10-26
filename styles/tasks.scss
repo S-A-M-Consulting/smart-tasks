@@ -1,5 +1,5 @@
 .button-dropdown {
-  background-color: #537EAC;
+  background-color: #537eac;
   color: white; /* Text color in the dropdown button */
   padding: 5px 10px; /* Adjust padding as needed to make it smaller */
   font-size: 14px; /* Adjust font size as needed to make it smaller */
@@ -10,7 +10,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: #AC8153; /* Change the text color to a custom color */
+  color: #ac8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -20,7 +20,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: #AC8153; /* Change the text color to a custom color */
+  color: #ac8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -29,7 +29,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: #AC8153; /* Change the text color to a custom color */
+  color: #ac8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -38,7 +38,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: #AC8153; /* Change the text color to a custom color */
+  color: #ac8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -48,7 +48,7 @@
   font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
-  color: #AC8153; /* Change the text color to a custom color */
+  color: #ac8153; /* Change the text color to a custom color */
   font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
@@ -59,7 +59,6 @@
   height: auto; /* Automatically adjust the height to maintain the image's aspect ratio */
   max-width: 100%; /* Limit the image's maximum width to the container width */
   max-height: 300px; /* Set a maximum height to prevent it from becoming too tall */
-
 }
 
 .task-size-style {
@@ -73,6 +72,10 @@
   justify-content: space-between;
 }
 
+.col:hover {
+  box-shadow: 5px 5px 10px #555;
+}
+
 .btn-group {
   margin-top: 20px;
 }
@@ -82,7 +85,5 @@
 }
 
 #no-scroll {
-  overflow:hidden;
+  overflow: hidden;
 }
-
-
