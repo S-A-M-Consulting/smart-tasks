@@ -9,7 +9,6 @@
 const express = require("express");
 const router = express.Router();
 const taskQueries = require('../db/queries/tasks');
-const fetch = require('node-fetch');
 const { delegateCategorize } = require('../api/external-api.js')
 
 
@@ -29,8 +28,7 @@ router.post('/', (req, res) => {
 
   taskQueries
     .createTask(newTask)
-    .then(async task => {
-      await delegateCategorize(task);
+    .then(task => {
       res.send(task);
     })
     .catch(e => console.log(e.message));

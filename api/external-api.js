@@ -2,8 +2,6 @@ require("dotenv").config();
 const fetch = require('node-fetch');
 const { editTask } = require('../db/queries/tasks.js');
 
-const urlEncode = string => string.split(' ').join('%20');
-
 const makeMovieAPICall = async function (task) {
   const name = task.task_name;
   try {
@@ -173,4 +171,37 @@ const makeProductAPICall = async function (task) {
   }
 };
 
-module.exports = {makeMovieAPICall, makeBookAPICall, makeProductAPICall, makeYelpAPICall};
+const makeRandomPhotoAPICall = async function (task) {
+  try {
+    const encoded = encodeURIComponent(task.task_name);
+    const apiKey = process.env.API_PHOTO_KEY;
+    const url = `https://api.unsplash.com/search/photos?query=${encoded}&per_page=1`;
+
+    const response = await fetch(url, {header: {Authorization: `Client-ID ${apiKey}`}});
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch data from open photos. Status: ${response.status}`
+      );
+    }
+
+    // Parse the response as JSON
+    const data = await response.json();
+
+    const image = data.results[0].small;
+    const description = '';
+
+    const updateObj = {
+      task_description: description,
+      url_image: image
+    };
+
+    await editTask(task.id, updateObj);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+
+
+module.exports = {makeMovieAPICall, makeBookAPICall, makeProductAPICall, makeYelpAPICall, makeRandomPhotoAPICall};
