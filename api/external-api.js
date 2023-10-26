@@ -89,12 +89,12 @@ const makeYelpAPICall = async function (task) {
     const apiKey = process.env.API_YELP_KEY;
     const encodedSearchString = encodeURIComponent(name);
     const url = `https://api.yelp.com/v3/businesses/search?location=Vancouver&term=${encodedSearchString}&limit=1`;
-                `https://api.yelp.com/v3/businesses/search?location=Vancouver&term=${encodedSearchString}&limit=1`
+
 
     const options = {
       headers: {
       accept: 'application/json',
-      Authorization: `Bearer P21WYCUYLBDqYWoiLts1HYmqnq8LHDidv_C-F69dJUcAYTHXOikbjFYklPF1K7unXNXldi3hLbUGzsWuUWm_UNJwNLGbfBnQf0Ac_uxQTJ3SHGUNupWnxQkAtcw5ZXYx`
+      Authorization: `Bearer ${apiKey}`
       }
     }
     // Make the API request and await the response
