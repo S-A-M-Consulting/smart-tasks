@@ -1,6 +1,5 @@
 require("dotenv").config();
 const fetch = require('node-fetch');
-const { editTask } = require('../db/queries/tasks.js');
 
 const makeMovieAPICall = async function (task) {
 
@@ -159,6 +158,7 @@ const makeProductAPICall = async function (task) {
     task.task_description = productInfo;
     task.url_image = productImg;
 
+    return task;
   } catch (error) {
     console.error("Error fetching product information:", error);
     throw error; // Rethrow the error for the caller to handle
@@ -212,4 +212,4 @@ const delegateCategorize = async (task) => {
 };
 
 
-module.exports = {makeMovieAPICall, makeBookAPICall, makeProductAPICall, makeYelpAPICall, makeRandomPhotoAPICall, delegateCategorize};
+module.exports = { delegateCategorize };
