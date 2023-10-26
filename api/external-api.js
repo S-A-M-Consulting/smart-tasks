@@ -169,9 +169,11 @@ const makeRandomPhotoAPICall = async function (task) {
   try {
     const encoded = encodeURIComponent(task.task_name);
     const apiKey = process.env.API_PHOTO_KEY;
-    const url = `https://api.unsplash.com/search/photos?query=${encoded}&per_page=1`;
+    const url = `https://api.unsplash.com/search/photos?query=${encoded}&per_page=1&client_id=${apiKey}`;
 
-    const response = await fetch(url, {header: {Authorization: `Client-ID ${apiKey}`}});
+    const options = {header: {Authorization: `Client-ID ${apiKey}`}};
+
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(
         `Failed to fetch data from open photos. Status: ${response.status}`
@@ -180,12 +182,14 @@ const makeRandomPhotoAPICall = async function (task) {
 
     // Parse the response as JSON
     const data = await response.json();
-
+    let image;
     if (data.results.length === 0) {
-      throw new Error(`No results found for "${task.task_name}" on unsplash`);
+      image = 'https://images.unsplash.com/photo-1599508704512-2f19efd1e35f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MjA4ODV8MHwxfHNlYXJjaHwxfHxxdWVzdGlvbnxlbnwwfHx8fDE2OTgzNTQ3NTV8MA&ixlib=rb-4.0.3&q=80&w=400';
+    } else {
+      image = data.results[0].urls.small;
     }
 
-    const image = data.results[0].small;
+   
     const description = '';
 
     task.task_description = description,
