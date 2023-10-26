@@ -1,11 +1,16 @@
 // load .env data into process.env
-require('dotenv').config();
+require("dotenv").config();
 
 // other dependencies
-const fs = require('fs');
-const chalk = require('chalk');
-const db = require('../db/connection');
-const {makeMovieAPICall, makeBookAPICall, makeYelpAPICall, makeProductAPICall} = require('../api/external-api');
+const fs = require("fs");
+const chalk = require("chalk");
+const db = require("../db/connection");
+const {
+  makeMovieAPICall,
+  makeBookAPICall,
+  makeYelpAPICall,
+  makeProductAPICall,
+} = require("../api/external-api");
 
 // PG connection setup
 // const connectionString = process.env.DATABASE_URL ||
@@ -15,10 +20,10 @@ const {makeMovieAPICall, makeBookAPICall, makeYelpAPICall, makeProductAPICall} =
 // Loads the schema files from db/schema
 const runSchemaFiles = async () => {
   console.log(chalk.cyan(`-> Loading Schema Files ...`));
-  const schemaFilenames = fs.readdirSync('./db/schema');
+  const schemaFilenames = fs.readdirSync("./db/schema");
 
   for (const fn of schemaFilenames) {
-    const sql = fs.readFileSync(`./db/schema/${fn}`, 'utf8');
+    const sql = fs.readFileSync(`./db/schema/${fn}`, "utf8");
     console.log(`\t-> Running ${chalk.green(fn)}`);
     await db.query(sql);
   }
@@ -26,10 +31,10 @@ const runSchemaFiles = async () => {
 
 const runSeedFiles = async () => {
   console.log(chalk.cyan(`-> Loading Seeds ...`));
-  const schemaFilenames = fs.readdirSync('./db/seeds');
+  const schemaFilenames = fs.readdirSync("./db/seeds");
 
   for (const fn of schemaFilenames) {
-    const sql = fs.readFileSync(`./db/seeds/${fn}`, 'utf8');
+    const sql = fs.readFileSync(`./db/seeds/${fn}`, "utf8");
     console.log(`\t-> Running ${chalk.green(fn)}`);
     await db.query(sql);
   }
@@ -37,32 +42,59 @@ const runSeedFiles = async () => {
 
 const addMovieInfo = async () => {
   console.log(chalk.cyan(`-> Loading film info ...`));
-  const dbResponse = await db.query('SELECT * FROM tasks WHERE category_id = 1');
+  const dbResponse = await db.query(
+    "SELECT * FROM tasks WHERE category_id = 1"
+  );
   //console.log(movies.rows[0].id);
   const shows = dbResponse.rows;
   for (const show of shows) {
     await makeMovieAPICall(show);
   }
-}
+};
 
 const addBookInfo = async () => {
   console.log(chalk.cyan(`-> Loading book info ...`));
-  const dbResponse = await db.query('SELECT * FROM tasks WHERE category_id = 3');
+  const dbResponse = await db.query(
+    "SELECT * FROM tasks WHERE category_id = 3"
+  );
 
-  for(const book of dbResponse.rows) {
+  for (const book of dbResponse.rows) {
     await makeBookAPICall(book);
   }
-}
+};
+
+const addYelpInfo = async () => {
+  const dbResponse = await db.query(
+    "SELECT * FROM tasks WHERE category_id = 2"
+  );
+  for (const yelp of dbResponse.rows) {
+    await makeYelpAPICall(yelp);
+  }
+};
+const addProductInfo = async () => {
+  console.log(chalk.cyan(`-> Loading product info ...`));
+  const dbResponse = await db.query(
+    "SELECT * FROM tasks WHERE category_id = 4"
+  );
+
+  for (const book of dbResponse.rows) {
+    await makeProductAPICall(book);
+  }
+};
 
 const runResetDB = async () => {
   try {
     process.env.DB_HOST &&
-      console.log(`-> Connecting to PG on ${process.env.DB_HOST} as ${process.env.DB_USER}...`);
+      console.log(
+        `-> Connecting to PG on ${process.env.DB_HOST} as ${process.env.DB_USER}...`
+      );
 
     await runSchemaFiles();
     await runSeedFiles();
     await addMovieInfo();
     await addBookInfo();
+    await addYelpInfo();
+    await addProductInfo();
     process.exit();
   } catch (err) {
     console.error(chalk.red(`Failed due to error: ${err}`));
