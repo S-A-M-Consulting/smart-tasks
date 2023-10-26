@@ -11,7 +11,7 @@
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
   color: orange; /* Change the text color to a custom color */
-  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
 }
@@ -21,7 +21,7 @@
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
   color: green; /* Change the text color to a custom color */
-  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
 }
@@ -30,7 +30,7 @@
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
   color: purple; /* Change the text color to a custom color */
-  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
 }
@@ -39,7 +39,7 @@
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
   color: red; /* Change the text color to a custom color */
-  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
 }
@@ -49,7 +49,7 @@
   font-weight: bold; /* Make the text bold */
   text-transform: uppercase; /* Convert text to uppercase */
   color: rgb(0, 0, 0); /* Change the text color to a custom color */
-  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  font-family: default; /* Use a custom decorative font */
   margin-bottom: 10px; /* Add some space at the bottom */
   margin-top: 20px;
 }
@@ -59,7 +59,7 @@
   height: auto; /* Automatically adjust the height to maintain the image's aspect ratio */
   max-width: 100%; /* Limit the image's maximum width to the container width */
   max-height: 300px; /* Set a maximum height to prevent it from becoming too tall */
-  
+
 }
 
 .task-size-style {
@@ -71,4 +71,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.btn-group {
+  margin-top: 20px;
+}
+
+.bi-rocket {
+  margin-right: 10px;
 }

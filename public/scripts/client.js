@@ -29,7 +29,6 @@ const createNewCard = function (task) {
               <li><a class="dropdown-item dropdown-category" href="#" data-category="4">Product</a></li>
             </ul>
           </div>
-          <small class="text-body-secondary">9 mins</small>
         </div>
       </div>
     </div>
