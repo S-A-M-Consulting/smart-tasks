@@ -6,51 +6,69 @@
   border: none; /* Remove the border */
 }
 
-
 .category-title-film {
-      font-size: 36px; /* Adjust the font size as needed */
-      font-weight: bold; /* Make the text bold */
-      text-transform: uppercase; /* Convert text to uppercase */
-      color: orange; /* Change the text color to a custom color */
-      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
-      margin-bottom: 10px; /* Add some space at the bottom */
-      margin-top: 20px;
-    }
+  font-size: 36px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* Convert text to uppercase */
+  color: orange; /* Change the text color to a custom color */
+  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  margin-bottom: 10px; /* Add some space at the bottom */
+  margin-top: 20px;
+}
 
 .category-title-restaurant {
-      font-size: 36px; /* Adjust the font size as needed */
-      font-weight: bold; /* Make the text bold */
-      text-transform: uppercase; /* Convert text to uppercase */
-      color: green; /* Change the text color to a custom color */
-      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
-      margin-bottom: 10px; /* Add some space at the bottom */
-      margin-top: 20px;
-    }
+  font-size: 36px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* Convert text to uppercase */
+  color: green; /* Change the text color to a custom color */
+  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  margin-bottom: 10px; /* Add some space at the bottom */
+  margin-top: 20px;
+}
 .category-title-book {
-      font-size: 36px; /* Adjust the font size as needed */
-      font-weight: bold; /* Make the text bold */
-      text-transform: uppercase; /* Convert text to uppercase */
-      color: purple; /* Change the text color to a custom color */
-      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
-      margin-bottom: 10px; /* Add some space at the bottom */
-      margin-top: 20px;
-    }
+  font-size: 36px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* Convert text to uppercase */
+  color: purple; /* Change the text color to a custom color */
+  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  margin-bottom: 10px; /* Add some space at the bottom */
+  margin-top: 20px;
+}
 .category-title-product {
-      font-size: 36px; /* Adjust the font size as needed */
-      font-weight: bold; /* Make the text bold */
-      text-transform: uppercase; /* Convert text to uppercase */
-      color: red; /* Change the text color to a custom color */
-      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
-      margin-bottom: 10px; /* Add some space at the bottom */
-      margin-top: 20px;
-    }
+  font-size: 36px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* Convert text to uppercase */
+  color: red; /* Change the text color to a custom color */
+  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  margin-bottom: 10px; /* Add some space at the bottom */
+  margin-top: 20px;
+}
 
-    .category-title-uncategorized {
-      font-size: 36px; /* Adjust the font size as needed */
-      font-weight: bold; /* Make the text bold */
-      text-transform: uppercase; /* Convert text to uppercase */
-      color: rgb(0, 0, 0); /* Change the text color to a custom color */
-      font-family: 'CursiveFont', cursive; /* Use a custom decorative font */
-      margin-bottom: 10px; /* Add some space at the bottom */
-      margin-top: 20px;
-    }
+.category-title-uncategorized {
+  font-size: 36px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* Convert text to uppercase */
+  color: rgb(0, 0, 0); /* Change the text color to a custom color */
+  font-family: "CursiveFont", cursive; /* Use a custom decorative font */
+  margin-bottom: 10px; /* Add some space at the bottom */
+  margin-top: 20px;
+}
+
+.fit-image {
+  width: 100%; /* Ensure the image takes up the entire width of its container */
+  height: auto; /* Automatically adjust the height to maintain the image's aspect ratio */
+  max-width: 100%; /* Limit the image's maximum width to the container width */
+  max-height: 300px; /* Set a maximum height to prevent it from becoming too tall */
+  
+}
+
+.task-size-style {
+  height: 100%;
+  width: 100%;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

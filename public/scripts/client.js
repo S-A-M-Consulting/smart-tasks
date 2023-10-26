@@ -9,11 +9,13 @@ const createNewCard = function (task) {
 
   const $template = $(`
   <div data-id=${task_id} id="task-id-${task_id}" class="col task">
-    <div class="card shadow-sm">
-      <img src=${task_image} alt="Thumbnail Image" width="100%" height="330">
+    <div class="card shadow-sm task-size-style" >
+      <img src=${task_image} alt="Thumbnail Image" class="fit-image">
         <div class="card-body">
-         <h5>${task_name}</h5>
-         <p class="card-text">${task_description}</p>
+          <div class="card-title-des">
+            <h5>${task_name}</h5>
+            <p class="card-text">${task_description}</p>
+          </div>
           <div class="d-flex justify-content-between align-items-center">
            <div class="btn-group">
             <button type="button" class="btn btn-sm btn-outline-secondary done-button">Done</button>
