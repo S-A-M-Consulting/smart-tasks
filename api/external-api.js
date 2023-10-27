@@ -26,7 +26,7 @@ const makeMovieAPICall = async function (task) {
     // Get the first result
     const movieInfo = data.results[0];
 
-
+    task.task_name = capitalizeWords(task.task_name);
     task.task_description = movieInfo.overview;
     task.url_image = `https://www.themoviedb.org/t/p/w1280${movieInfo.poster_path}`;
     task.link_url = `https://www.themoviedb.org/${movieInfo.media_type}/${movieInfo.id}`
@@ -67,6 +67,7 @@ const makeBookAPICall = async function (task) {
   const imageResponse = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
 
   //console.log(imageResponse);
+  task.task_name = capitalizeWords(task.task_name)
 
   task.task_description = bookInfo.first_sentence[0];
   task.url_image = imageResponse;
@@ -156,11 +157,10 @@ const makeProductAPICall = async function (task) {
     // Get the first result
     const productInfo = data.shopping_results[0].title;
     const productImg = data.shopping_results[0].thumbnail;
-    const productname = task.task_name.charAt(0).toUpperCase() + task.task_name.slice(1);
 
 
     //console.log(imageResponse)
-    task.task_name = productname;
+    task.task_name = capitalizeWords(task.task_name);
     task.task_description = productInfo;
     task.url_image = productImg;
     task.link_url = data.shopping_results[0].product_link;
@@ -198,7 +198,7 @@ const makeRandomPhotoAPICall = async function (task) {
 
 
     const description = '';
-
+    task.task_name= capitalizeWords(task.task_name);
     task.task_description = description,
     task.url_image = image
 
@@ -222,5 +222,10 @@ const delegateCategorize = async (task) => {
   return await selectedFunc(task);
 };
 
+function capitalizeWords(input) {
+  return input.replace(/\b\w/g, function (match) {
+    return match.toUpperCase();
+  });
+}
 
 module.exports = { delegateCategorize };
