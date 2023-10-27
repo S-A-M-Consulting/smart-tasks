@@ -2,6 +2,8 @@
 
 Smart Task is an auto-categorizing task list app. We have built the app to categorize user input into four categories: movies, restaurants, books, and products. Smart Task uses external API calls to provide the user with an image, description, and link to their task. This project was built by Mitch Johnston, Yiqun (Albert) Huang, and Steve Fraser.
 
+![Smart Task Screenshot](docs/smart_task_screenshot.png)
+
 ## Getting Started
 
 1. To get started create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
