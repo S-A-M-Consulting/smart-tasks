@@ -22,5 +22,6 @@ CREATE TABLE tasks (
   task_name VARCHAR(255) NOT NULL,
   task_description VARCHAR(1000),
   url_image VARCHAR(255),
+  link_url VARCHAR(1000) DEFAULT '#',
   is_complete BOOLEAN
 );

@@ -6,11 +6,14 @@ const createNewCard = function (task) {
   const task_name = task.task_name;
   const task_description = task.task_description;
   const task_image = task.url_image;
+  const link_url = task.link_url;
 
   const $template = $(`
   <div data-id=${task_id} id="task-id-${task_id}" class="col task">
     <div class="card shadow-sm task-size-style" >
-      <img src=${task_image} alt="Thumbnail Image" class="fit-image">
+      <a href="${link_url}">
+        <img src=${task_image} alt="Thumbnail Image" class="fit-image">
+      </a>
         <div class="card-body">
           <div class="card-title-des">
             <h5>${task_name}</h5>

@@ -29,6 +29,8 @@ const makeMovieAPICall = async function (task) {
 
     task.task_description = movieInfo.overview;
     task.url_image = `https://www.themoviedb.org/t/p/w1280${movieInfo.poster_path}`;
+    task.link_url = `https://www.themoviedb.org/${movieInfo.media_type}/${movieInfo.id}`
+
 
     return task;
 
@@ -55,7 +57,7 @@ const makeBookAPICall = async function (task) {
   const data = await response.json();
 
   // Check if there are results
-  if (data.docs.length === 0) {
+  if (!data.docs || data.docs.length === 0) {
     throw new Error(`No results found for "${queryString}" on open library.`);
   }
 
@@ -111,8 +113,11 @@ const makeYelpAPICall = async function (task) {
     const yelpInfo = data.businesses[0];
     //console.log(movieInfo);
 
+    task.task_name = yelpInfo.name
     task.task_description = yelpInfo.categories[0].title;
     task.url_image = yelpInfo.image_url;
+    task.link_url = yelpInfo.url;
+
 
     return task;
   } catch (error) {
@@ -151,12 +156,14 @@ const makeProductAPICall = async function (task) {
     // Get the first result
     const productInfo = data.shopping_results[0].title;
     const productImg = data.shopping_results[0].thumbnail;
+    const productname = task.task_name.charAt(0).toUpperCase() + task.task_name.slice(1);
 
 
-    //console.log(imageResponse);
-
+    //console.log(imageResponse)
+    task.task_name = productname;
     task.task_description = productInfo;
     task.url_image = productImg;
+    task.link_url = data.shopping_results[0].product_link;
 
     return task;
   } catch (error) {
@@ -189,7 +196,7 @@ const makeRandomPhotoAPICall = async function (task) {
       image = data.results[0].urls.small;
     }
 
-   
+
     const description = '';
 
     task.task_description = description,

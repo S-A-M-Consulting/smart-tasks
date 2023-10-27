@@ -12,17 +12,17 @@ INSERT INTO categories (category_name) VALUES ('to_buy');
 -- Tasks table seed to_watch (category 1)
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 1, 'Breaking Bad', FALSE);
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 1, 'Arrested Development', FALSE);
-INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 1, 'Waiting for Guffman', FALSE);
+INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 1, 'The Wire', FALSE);
 
 -- Tasks table seed  to_eat (category 2)
+INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 2, 'Cactus Club', FALSE);
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 2, 'Five Guys', FALSE);
-INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 2, 'Deep Fried Mars Bar', FALSE);
-INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 2, 'Milestones', FALSE);
+INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 2, 'Earls', FALSE);
 
 -- Tasks table seed  to_read (category 3)
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 3, 'Twilight', FALSE);
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 3, 'Dune', FALSE);
-INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 3, 'Blink', FALSE);
+INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 3, 'The Iliad', FALSE);
 
 -- Tasks table seed  to_buy (category 4)
 INSERT INTO tasks (user_id, category_id, task_name, is_complete) VALUES (1, 4, 'Socks', FALSE);

@@ -42,6 +42,7 @@ const addExternalInfo = async () => {
 
   for (const result of dbResponse.rows) {
     const updatedTask = await delegateCategorize(result);
+    console.log(updatedTask);
     await update(db, 'tasks', updatedTask.id, updatedTask);
   }
 }

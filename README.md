@@ -1,5 +1,6 @@
-LHL Node Skeleton
-=========
+#Smart Task - Lighthouse Labs Midterm Project
+
+Smart Task is an auto-categorizing task list app. We have built the app to categorize 
 
 ## Project Setup
 
