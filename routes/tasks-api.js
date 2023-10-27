@@ -34,9 +34,17 @@ router.post('/', async (req, res) => {
     .catch(e => console.log(e.message));
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
   const task_id = req.params.id;
-  const changed = req.body;
+  let changed = req.body;
+  const db_task = await taskQueries.getTaskById(task_id);
+
+  if(changed.category_id && changed.category_id !== db_task.category_id) {
+
+    db_task.category_id = changed.category_id;
+    changed = await delegateCategorize(db_task);
+  }
+
   taskQueries
     .editTask(task_id, changed)
     .then(task => {

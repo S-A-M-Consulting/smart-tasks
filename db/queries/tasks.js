@@ -1,6 +1,6 @@
 //Authored by @mxtchjohnston
 const db = require('../connection');
-const { error, getAll, insert, update, debug} = require('./util.js');
+const { error, getAll, insert, update, debug, getOne} = require('./util.js');
 
 const getTasksByUser = (user_id) => {
   return db.query('SELECT * FROM tasks WHERE user_id = $1 AND is_complete = FALSE', [user_id])
@@ -18,5 +18,11 @@ const editTask = (id, data) => {
     .catch(error('editTask', id, data));
 }
 
-module.exports = {getTasksByUser, createTask, editTask};
+const getTaskById = (task_id) => {
+  return db.query('SELECT * FROM tasks WHERE id = $1', [task_id])
+    .then(getOne)
+    .catch(error('getTaskById'));
+}
+
+module.exports = {getTasksByUser, createTask, editTask, getTaskById};
 
